@@ -1,28 +1,5 @@
-// common.h - Common MKW definitions and functions
-//
-// Copyright c 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files the "Software", to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-
 #pragma once
 #include <kamek.h>
-
 
 enum VehicleId
 {
@@ -220,3 +197,24 @@ enum ItemId{
     UNKNOWN_0X13=0x13,
     NONE=0x14,
 };
+
+struct ptmf{
+    int this_delta;
+    int vtableOffset;
+    void *functionPointer;
+};//total size 0xc
+
+struct ptmfHolder{
+    u32 vtable;
+    void* subject; //Pointer to the class instance, most times the class inheriting from PushButton (such as the class for the buttons of the selectionScreen)
+    ptmf ptmf;
+};//total size 0x14
+
+template <class Subject, typename Ret, typename A1, typename A2>
+struct PtmfHolder_2A{
+    u32 vtable;
+    Subject* subject; //Pointer to the class instance, most times the class inheriting from PushButton (such as the class for the buttons of the selectionScreen)
+    Ret (Subject::*ptmf)(u32 r4, u32 r5);
+};//total size 0x14
+
+extern u32 ptmfVtable;

@@ -2,6 +2,7 @@
 SETLOCAL EnableDelayedExpansion
 
 :: Make build folder
+cls
 mkdir build
 
 ::Hardcoded because yes

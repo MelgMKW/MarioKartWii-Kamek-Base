@@ -4,7 +4,7 @@
 #include <raceinfo.h>
 #include <menudata.h>
 #include <settings.h>
-#include <player.h>
+#include <playerholder.h>
 #include <rknetcontroller.h>
 #include <musichandler.h>
 #include <common.h>
@@ -15,8 +15,8 @@
 #include <itembehaviour.h>
 #include <itemobjproperties.h>
 #include <screen.h>
-#include <ScreenElement.h>
-
+#include <screenelement.h>
+#include <specificscreens.h>
 
 bool CheckButtonPressed(u8 playerHudId, UniversalButtons button);
 extern "C"{

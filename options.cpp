@@ -3,7 +3,7 @@
 #include <raceinfo.h>
 #include <menudata.h>
 #include <settings.h>
-#include <player.h>
+#include <playerholder.h>
 #include <rknetcontroller.h>
 #include <musichandler.h>
 
