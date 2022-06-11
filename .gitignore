@@ -3,6 +3,8 @@
 /cw
 /.vscode
 /vp
+/projects/DolphinPack
+/projects/MyPack
 
 # Compiled Object files
 *.slo
