@@ -2,6 +2,7 @@
 *.d
 /cw
 /.vscode
+/vp
 
 # Compiled Object files
 *.slo

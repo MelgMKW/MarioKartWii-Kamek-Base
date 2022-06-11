@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Data\\James\\Brawlbox's Mission Collection\\Kamek\\Kamek\\Kamek.csproj": {}
+    "D:\\Modding\\Coding\\Kamek\\Kamek\\Kamek.csproj": {}
   },
   "projects": {
-    "C:\\Data\\James\\Brawlbox's Mission Collection\\Kamek\\Kamek\\Kamek.csproj": {
+    "D:\\Modding\\Coding\\Kamek\\Kamek\\Kamek.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Data\\James\\Brawlbox's Mission Collection\\Kamek\\Kamek\\Kamek.csproj",
+        "projectUniqueName": "D:\\Modding\\Coding\\Kamek\\Kamek\\Kamek.csproj",
         "projectName": "Kamek",
-        "projectPath": "C:\\Data\\James\\Brawlbox's Mission Collection\\Kamek\\Kamek\\Kamek.csproj",
+        "projectPath": "D:\\Modding\\Coding\\Kamek\\Kamek\\Kamek.csproj",
         "packagesPath": "C:\\Users\\jghud\\.nuget\\packages\\",
-        "outputPath": "C:\\Data\\James\\Brawlbox's Mission Collection\\Kamek\\Kamek\\obj\\",
+        "outputPath": "D:\\Modding\\Coding\\Kamek\\Kamek\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jghud\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -14,9 +14,7 @@ loaderFunctionsEx functions_p = {
 	(DVDReadPrio_t) 0x8015E834,
 	(DVDClose_t) 0x8015E568,
 	(sprintf_t) 0x80011A2C,
-	(EGG_Heap_Alloc_t) 0x80229814,
-	(EGG_Heap_Free_t) 0x80229B84,
-    (int *) 0x802A4080}
+    (RKSystem*) 0x802A4080}
 };
 loaderFunctionsEx functions_e = {
 	{(OSReport_t) 0x801A2530,
@@ -26,9 +24,7 @@ loaderFunctionsEx functions_e = {
 	(DVDReadPrio_t) 0x8015E794,
 	(DVDClose_t) 0x8015E4C8,
 	(sprintf_t) 0x80010ECC,
-	(EGG_Heap_Alloc_t) 0x80229490,
-	(EGG_Heap_Free_t) 0x80229800,
-    (int *) 0x8029fd00}
+    (RKSystem*) 0x8029fd00}
 };
 loaderFunctionsEx functions_j = {
 	{(OSReport_t) 0x801A24F0,
@@ -38,9 +34,7 @@ loaderFunctionsEx functions_j = {
 	(DVDReadPrio_t) 0x8015E754,
 	(DVDClose_t) 0x8015E488,
 	(sprintf_t) 0x80011950,
-	(EGG_Heap_Alloc_t) 0x80229734,
-	(EGG_Heap_Free_t) 0x80229AA4,
-    (int *) 0x802a3a00}
+    (RKSystem*) 0x802a3a00}
 };
 loaderFunctionsEx functions_k = {
 	{(OSReport_t) 0x801A292C,
@@ -50,9 +44,7 @@ loaderFunctionsEx functions_k = {
 	(DVDReadPrio_t) 0x8015E8AC,
 	(DVDClose_t) 0x8015E5E0,
 	(sprintf_t) 0x80011A94,
-	(EGG_Heap_Alloc_t) 0x80229B88,
-	(EGG_Heap_Free_t) 0x80229EF8,
-    (int *) 0x80292080}
+    (RKSystem*) 0x80292080}
 };
 
 void unknownVersion()
@@ -78,7 +70,7 @@ void loadIntoMKW()
 	}
 
 	char path[64];
-	funcs->sprintf(path, "/varietypack/%c.bin", region);
+	funcs->sprintf(path, "/kamek/%c.bin", region);
 	loadKamekBinaryFromDisc(funcs, path);
     
     return;

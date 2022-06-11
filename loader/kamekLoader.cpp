@@ -1,4 +1,8 @@
 #include "kamekLoader.h"
+#include <Kamek/kamek.hpp>
+#include <System/dvd.hpp>
+#include <System/system.hpp>
+#include <egg/egg.hpp>
 
 struct KBHeader {
 	u32 magic1;
@@ -133,9 +137,11 @@ kCommandHandler(BranchLink) {
 inline void cacheInvalidateAddress(u32 address) {
 	register u32 addressRegister = address;
 	asm {
-		dcbst 0, addressRegister
-		sync
-		icbi 0, addressRegister
+		ASM(
+		dcbst 0, addressRegister;
+		sync;
+		icbi 0, addressRegister;
+		)
 	}
 }
 
@@ -155,7 +161,10 @@ void loadKamekBinary(loaderFunctions *funcs, const void *binary, u32 binaryLengt
 		header->bssSize, header->codeSize, header->ctorStart, header->ctorEnd);
         
 	u32 textSize = header->codeSize + header->bssSize;
-	u32 text = (u32)funcs->kamekAlloc(textSize, 32, *(funcs->heap+0x64/sizeof(int)));
+
+	EGG::ExpHeap *heap = funcs->rkSystem->EGGSystem;
+	u32 text = (u32)heap->alloc(textSize, 0x20);
+
 	if (!text)
 		kamekError(funcs, "FATAL ERROR: Out of code memory");
 
@@ -231,22 +240,23 @@ void loadKamekBinaryFromDisc(loaderFunctions *funcs, const char *path)
 		kamekError(funcs, err);
 	}
 
-	DVDHandle handle;
-	if (!funcs->DVDFastOpen(entrynum, &handle))
+	DVDCommandBlock fileInfo;
+	if (!funcs->DVDFastOpen(entrynum, &fileInfo))
 		kamekError(funcs, "FATAL ERROR: Failed to open file!");
 	
-	funcs->OSReport("DVD file located: addr=%p, size=%d\n", handle.address, handle.length);
+	funcs->OSReport("DVD file located: addr=%p, size=%d\n", fileInfo.address, fileInfo.length);
     
-	u32 length = handle.length, roundedLength = (handle.length + 0x1F) & ~0x1F;
-	void *buffer = funcs->kamekAlloc(roundedLength, 32, *(funcs->heap+0x64/sizeof(int)));
+	u32 length = fileInfo.length;
+	u32 roundedLength = (fileInfo.length + 0x1F) & ~0x1F;
+	EGG::ExpHeap *heap = funcs->rkSystem->EGGSystem;
+	void *buffer = heap->alloc(roundedLength, 0x20);
+
 	if (!buffer)
 		kamekError(funcs, "FATAL ERROR: Out of file memory");
 	
-	funcs->DVDReadPrio(&handle, buffer, roundedLength, 0, 2);
-	funcs->DVDClose(&handle);
+	funcs->DVDReadPrio(&fileInfo, buffer, roundedLength, 0, 2);
+	funcs->DVDClose(&fileInfo);
 
-	loadKamekBinary(funcs, buffer, handle.length);
-	
-	funcs->kamekFree(buffer, 0);
-	funcs->OSReport("All done!\n");
+	loadKamekBinary(funcs, buffer, fileInfo.length);
+	heap->free(buffer);
 }
