@@ -2,7 +2,8 @@
 #include <egg/egg.hpp>
 #include <Race/racedata.hpp>
 #include <Kamek/kamek.hpp>
-#include <common.hpp>
+#include <System/timer.hpp>
+
 
 typedef enum RaceState{
 	RACEINTRO = 0x2,

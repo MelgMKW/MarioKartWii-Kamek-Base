@@ -46,6 +46,73 @@ typedef unsigned long size_t;
 #define offsetof(st, m) \
     ((u32)&(((st *)0)->m))
 
+struct ptmf{
+    int this_delta;
+    int vtableOffset;
+    void *functionPointer;
+};//total size 0xc
+
+struct ptmfHolder{
+    u32 vtable;
+    void* subject; //Pointer to the class instance, most times the class inheriting from PushButton (such as the class for the buttons of the selectionScreen)
+    ptmf ptmf;
+};//total size 0x14
+
+template <typename Ret>
+struct PtmfHolderBase_0A {
+    virtual Ret operator()() = 0;
+};
+
+template <class Subject, typename Ret>
+struct PtmfHolder_0A : PtmfHolderBase_0A<Ret> {
+    Subject * subject;
+    Ret (Subject::*ptmf)();
+    virtual Ret operator()() {
+        return (subject->*ptmf)();
+    }
+};
+
+template <typename Ret, typename A1>
+struct PtmfHolderBase_1A {
+    virtual Ret operator()(A1 a1) = 0;
+};
+
+template <class Subject, typename Ret, typename A1>
+struct PtmfHolder_1A : PtmfHolderBase_1A<Ret, A1> {
+    Subject * subject;
+    Ret (Subject::*ptmf)(A1);
+    virtual Ret operator()(A1 a1) {
+        return (subject->*ptmf)(a1);
+    }
+};
+
+template <typename Ret, typename A1, typename A2>
+struct PtmfHolderBase_2A {
+    virtual Ret operator()(A1 a1, A2 a2) = 0;
+};
+template <class Subject, typename Ret, typename A1, typename A2>
+struct PtmfHolder_2A : PtmfHolderBase_2A<Ret, A1, A2> {
+    Subject * subject;
+    Ret (Subject::*ptmf)(A1, A2);
+    virtual Ret operator()(A1 a1, A2 a2) {
+        return (subject->*ptmf)(a1, a2);
+    }
+};
+
+template <typename Ret, typename A1, typename A2, typename A3>
+struct PtmfHolderBase_3A {
+    virtual Ret operator()(A1 a1, A2 a2, A3 a3) = 0;
+};
+template <class Subject, typename Ret, typename A1, typename A2, typename A3>
+struct PtmfHolder_3A : PtmfHolderBase_3A<Ret, A1, A2, A3> {
+    Subject * subject;
+    Ret (Subject::*ptmf)(A1, A2, A3);
+    virtual Ret operator()(A1 a1, A2 a2, A3 a3) {
+        return (subject->*ptmf)(a1, a2, a3);
+    }
+};
+
+
 #ifdef __INTELLISENSE__
 inline void * operator new(unsigned long long,  void * ptr) { return ptr; }
 #define ASM(...)

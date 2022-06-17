@@ -17,9 +17,9 @@ public:
     UnkArray array;
 }; //Total Size 0x144
 
-class BalloonClass{
-    BalloonClass(); //0x807f1c58
-    ~BalloonClass(); //0x80858864
+class RaceNameClass{
+    RaceNameClass(); //0x807f1c58
+    ~RaceNameClass(); //0x80858864
     u8 unknown_0x0[0xC4];
 }; //total size 0xC4
 
@@ -27,7 +27,7 @@ class CtrlRaceNameBalloon : public LayoutUIControl {
     CtrlRaceNameBalloon(); //808588cc
     virtual ~CtrlRaceNameBalloon(); //807f4820
     u8 unknown_0x174[0x17C-0x174];
-    BalloonClass *balloonClass;
+    RaceNameClass *balloonClass;
     u8 unknown_0x180[0x188-0x180];
 }; //total size 0x188
 
@@ -35,6 +35,7 @@ class PauseScreen : public Screen{
 public:
     PauseScreen(); //80858ca4 vtable 0x808da928
     virtual ~PauseScreen(); //80624b38
+    virtual ScreenType GetPauseScreenId(); //0x64
     u32 unknown_0x44;
     PushButton **buttons; //number of buttons depends on the specific screen
     u8 unknown_0x4C[0x54-0x4C];
@@ -76,7 +77,7 @@ public:
     UnkClass2 class2;
     u8 unknown_0x1C4[0x1D0-0x1C4]; //based on all of the new such as 806234f4
     CtrlRaceNameBalloon *ctrlRaceNameBalloonArray; //0x1d0 one per hudslot
-    BalloonClass *balloonClassArray; //0x1D4 one per hudslot
+    RaceNameClass *balloonClassArray; //0x1D4 one per hudslot
     u8 unknown_0x1D8[4];
 }; //Total Size 0x1DC
 extern RaceScreen *raceScreen;

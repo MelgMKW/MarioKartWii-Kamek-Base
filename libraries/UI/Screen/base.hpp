@@ -56,10 +56,11 @@ public:
     void EndStateAnimate(float animLength, u32 animId);
     void SetTransitionSound(u32 id, u32 id2); //0x80602d20
     u32 screenId;
-    UnkType unknown_0x8[3];
+    u32 currentState; //0x4 = focus, idk others
+    u32 unknown_0xC[2];
     float unknown_0x14[2];
-    UnkType unknown_0x1C[2];
-    ControlGroup controlGroup;
+    u32 unknown_0x1C[2]; //some kind of frame counters
+    ControlGroup controlGroup; //0x24
     ScreenActionController *screenActionController;
     UnkType unknown_0x3C[2];
 }; //Total Size 0x44

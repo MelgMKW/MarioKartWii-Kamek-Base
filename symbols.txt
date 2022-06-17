@@ -125,6 +125,9 @@ DisplayLap__11LakituModelFf = 0x8055a938
 #Mii
 InitModel__13MiiHeadsModelFP3MiiP13ModelDirectorUiUiUiUi =0x8055c580
 
+#Cameras 
+SetProjection__17RaceCameraManagerFUiUi = 0x80566020
+
 #playerHolder
 IsLocal__6PlayerFv = 0x80590650
 getPlayerIdx__14PlayerPointersFv = 0x80590a5c
@@ -139,9 +142,10 @@ __dt__13ControlLoaderFv = 0x805c2c20
 __vt__18ParentScreenLayout = 0x808b950c
 ParentScreenLayout = 0x805E830C
 
-__vt__12ScreenLayout = 0x808b94c4
-ScreenLayout = 0x805e85a8
-dtScreenLayout = 0x805e8630
+__vt__12MainLayout = 0x808b94c4
+MainLayout = 0x805e85a8
+dtMainLayout = 0x805e8630
+GetPaneByName__10MainLayoutFPc = 0x805e8368
 
 #BMGThing
 BMGThing = 0x805f8b34
@@ -203,12 +207,13 @@ CreateScreen__5SceneF10ScreenType = 0x80622d08
 __ct__10PushButtonFv = 0x805bd3a8
 __dt__10PushButtonFv  = 0x805bd4b0
 __vt__10PushButton = 0x808b776c
+
 HandleClick__10PushButtonFUiUi = 0x805be358
 SetOnClickHandler__10PushButtonFP37PtmfHolderBase_2A<v,P10PushButton,Ui>Uc =0x805bdac8
-
-SelectButton__10PushButtonFUi = 0x805bdb44
+SetOnSelectHandler__10PushButtonFP34PtmfHolderBase_1A<v,P10PushButton> = 0x805bdae0
+SelectButton__10PushButtonFUi = 0x805bdaf0
 InitButton__10PushButtonFPcPcPcUiUib = 0x805bd518
-SetOnClickHandler__10PushButtonFP35PtmfHolderBase_2A<P10PushButton,Ui>Uc = 0x805bdac8
+
 SelectFocus__10PushButtonFv = 0x805bdb58
 GetAnimationFrameSize__10PushButtonFv = 0x805bdf88
 
@@ -281,7 +286,7 @@ GetStaticInstanceAddr__12CtrlRaceBaseFv = 0x807ec8ec
 getClassName__12CtrlRaceBaseFv = 0x807ebf14
 UpdatePausePosition__12CtrlRaceBaseFv = 0x807ec3e0
 func_0x40__12CtrlRaceBaseFv = 0x807ec20c
-func_0x44__12CtrlRaceBaseFv = 0x807ebe40
+GetPane__12CtrlRaceBaseFv = 0x807ebe40
 isPaused__12CtrlRaceBaseFv = 0x807ec3b0
 hasRaceStarted__12CtrlRaceBaseFv = 0x807ec3c4
 getPlayerId__12CtrlRaceBaseFv = 0x807ec7f8
@@ -380,12 +385,19 @@ OnInit__13OptionsScreenFv = 0x805fd6e4
 ClearInstance__13OptionsScreenFv = 0x805fd8e4
 OnLoad__13OptionsScreenFv = 0x805fd8e8
 GetStaticInstanceAddr__13OptionsScreenFv = 0x80601068
+HandleClick__13OptionsScreenFP10PushButtonUi = 0x805fd90c
 
 #VSSettingsScreen
 __ct__15VSSettingScreenFv = 0x806284c8
 
-HandleClick__13OptionsScreenFP10PushButtonUi = 0x805fd90c
-
+#WFCMainScreen
+__ct__13WFCMainScreenFv = 0x8064b640
+__dt__13WFCMainScreenFv = 0x8064b850
+getNextScreen__13WFCMainScreenFv = 0x8064d688
+OnInit__13WFCMainScreenFv = 0x8064b910
+OnLoad__13WFCMainScreenFv = 0x8064bc90
+GetStaticInstanceAddr__13WFCMainScreenFv = 0x8064d690
+HandleSelectButton__13WFCMainScreenFP10PushButton = 0x8064bf4c
 
 #Sound
 GetCourseMusicSlot = 0x807101f4
@@ -448,10 +460,20 @@ itemSlotData = 0x809c3670
 itemBehaviourTable = 0x809c36a0
 raceScreen = 0x809c4680
 
+#LECODE
+LeCodeID = 0x80553e08
 
-
-#Tests
-GetPosition = 0x8059020c
+#tests
+__vt__14CtrlRaceCTInfo = 0x808d4110
+__vt__24CtrlRaceWifiStartMessage = 0x808d4110
+__dt__24CtrlRaceWifiStartMessageFv = 0x807F91F0
+OnUpdate__24CtrlRaceWifiStartMessageFv = 0x807f8c34
+GetStaticInstanceAddr__24CtrlRaceWifiStartMessageFv = 0x807f924c
+getClassName__24CtrlRaceWifiStartMessageFv = 0x807f8988
+func_0x40__24CtrlRaceWifiStartMessageFv = 0x807f8be8
+GetPane__24CtrlRaceWifiStartMessageFv = 0x807f91e8
+isPaused__24CtrlRaceWifiStartMessageFv = 0x807f8bd8
+hasRaceStarted__24CtrlRaceWifiStartMessageFv = 0x807F8BA4
 
 #GX
 __GXAbort= 0x8016e6e4
@@ -655,4 +677,3 @@ StateGX_ChangeProjectionv= 0x802417fc
 TPLGetGXTexObjFromPalette= 0x801b7544
 
 
-SetProjection__17RaceCameraManagerFUiUi = 0x80566020

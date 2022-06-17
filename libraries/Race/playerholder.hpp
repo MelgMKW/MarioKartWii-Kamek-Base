@@ -13,9 +13,9 @@ References:
 */
 
 #pragma once
-#include <common.hpp>
 #include <Kamek/kamek.hpp>
 #include <nw4r/snd/snd.hpp>
+#include <Race/racedata.hpp>
 
 class PlayerModel;
 
@@ -212,6 +212,7 @@ public:
   UnkType updateDiving(); // 805869dc
   UnkType updateSlipstream(); // 80586fa8
   UnkType updateSpecialFloor(); // 80587590, always inlined
+
   PlayerPointers *playerPointers;
   int *unknown_0x4;
   int *unknown_0x8;
@@ -241,6 +242,7 @@ public:
   virtual int hop(); // 8057da5c
   virtual int updateMtCharge(); // 8057ee50
   virtual void unknown_23();
+  
   float speedMultiplier; // 50cc: public 0.8, 100cc: public 0.9, 150cc: public 1.0
   float baseSpeed;
   float softSpeedLimit;
@@ -998,7 +1000,8 @@ public:
   bool isCpu(); // 80590664
   UnkType setPlayerPosition(Vec3 *position); // 80590238
   UnkType setPlayerRotation(Quat *rotation); // 80590288
-  PlayerParams *params;
+
+  PlayerParams *params; //0x0
   PlayerSub1c *playerSub1c;
   PlayerGraphics *playerGraphics;
   Suspensions **suspensions;

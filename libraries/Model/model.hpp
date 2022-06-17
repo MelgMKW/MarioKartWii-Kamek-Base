@@ -1,7 +1,6 @@
 #pragma once
 #include <egg/egg.hpp>
 #include <Kamek/kamek.hpp>
-#include <common.hpp>
 #include <nw4r/ut/ut.hpp>
 //#include <Misc/Mii.hpp>
 

@@ -1,9 +1,8 @@
 #pragma once
-
-#include <common.hpp>
-#include <UI/Ctrl/Ctrl.hpp>
 #include <Kamek/kamek.hpp>
 #include <nw4r/lyt/lyt.hpp>
+#include <UI/Ctrl/Ctrl.hpp>
+
 
 enum ScreenInput{ //each value represent an action, itself represented by an actionHandler in PushButton's screenElementActionHolder and a bool in the same struct 
     FORWARD_PRESS,
@@ -80,15 +79,16 @@ public:
     void SelectFocus();
     void InitButton(char *folderName, char *ctrName, char *variant, u32 playerCount, u32 r8, bool inaccessible); //805bd518
     void SetOnClickHandler(PtmfHolderBase_2A<void, PushButton*, u32> *handler, u8 r5);
+    void SetOnSelectHandler(PtmfHolderBase_1A<void, PushButton*> *handler);
     float GetAnimationFrameSize(); //0x805bdf88
 
     ScreenElementActionHolder actionHolder;
-    ptmfHolder onSelectHandlerObj; //0x1F8
-    ptmfHolder onDeselectHandlerObj; //0x20C
-    ptmfHolder onclickHandlerObj; //0x220
-    ptmfHolder *onClickHandler; //0x234
-    ptmfHolder *onSelectHandler; //0x238
-    ptmfHolder *onDeselectHandler; //0x23C
+    PtmfHolder_0A<PushButton, void> onSelectHandlerObj; //0x1F8
+    PtmfHolder_0A<PushButton, void> onDeselectHandlerObj; //0x20C
+    PtmfHolder_0A<PushButton, void> onclickHandlerObj; //0x220
+    PtmfHolder_0A<PushButton, void> *onClickHandler; //0x234
+    PtmfHolder_0A<PushButton, void> *onSelectHandler; //0x238
+    PtmfHolder_0A<PushButton, void> *onDeselectHandler; //0x23C
     u32 buttonId; //0x240
     u32 playerCount; //0x244
     u8 unknown_0x248[0x254-0x248];
@@ -164,7 +164,7 @@ public:
     u32 hoveredButtonID;
     u32 id; //if there are multiple radiobuttonctrol
     ScreenElementActionHolder actionHolder; //0x210
-    RadioButtonControlOptionButton *radioButtonControlOptionButton; //0x294
+    RadioButtonControlOptionButton *optionButtonsArray; //0x294
 }; //total size 0x298
 
 class UpDownControlUpDownButton : public LayoutUIControl {

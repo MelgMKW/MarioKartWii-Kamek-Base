@@ -4,8 +4,49 @@ Stebler, CLF (main documentation)
 #pragma once
 #include <Kamek/kamek.hpp>
 #include <egg/egg.hpp>
-#include <common.hpp>
 #include <Race/playerholder.hpp>
+
+enum ItemObjectId{
+    OBJ_GREEN_SHELL=0x0,
+    OBJ_RED_SHELL=0x1,
+    OBJ_BANANA=0x2,
+    OBJ_FAKE_ITEM_BOX=0x7,
+    OBJ_MUSHROOM=0x3,
+    OBJ_BOBOMB=0x9,
+    OBJ_BLUE_SHELL=0x5,
+    OBJ_LIGHTNING=0x6,
+    OBJ_STAR=0x4,
+    OBJ_GOLDEN_MUSHROOM=0xC,
+    OBJ_MEGA_MUSHROOM=0x8,
+    OBJ_BLOOPER=0xA,
+    OBJ_POW_BLOCK=0xB,
+    OBJ_THUNDER_CLOUD=0xE,
+    OBJ_BULLET_BILL=0xD
+};
+
+enum ItemId{
+    GREEN_SHELL=0x0,
+    RED_SHELL=0x1,
+    BANANA=0x2,
+    FAKE_ITEM_BOX=0x3,
+    MUSHROOM=0x4,
+    TRIPLE_MUSHROOM=0x5,
+    BOBOMB=0x6,
+    BLUE_SHELL=0x7,
+    LIGHTNING=0x8,
+    STAR=0x9,
+    GOLDEN_MUSHROOM=0xA,
+    MEGA_MUSHROOM=0xB,
+    BLOOPER=0xC,
+    POW_BLOCK=0xD,
+    THUNDER_CLOUD=0xE,
+    BULLET_BILL=0xF,
+    TRIPLE_GREEN_SHELL=0x10,
+    TRIPLE_RED_SHELL=0x11,
+    TRIPLE_BANANA=0x12,
+    UNKNOWN_0X13=0x13,
+    NONE=0x14,
+};
 
 class ItemHolderPlayer;
 class PlayerModel;

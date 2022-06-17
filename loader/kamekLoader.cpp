@@ -1,4 +1,4 @@
-#include "kamekLoader.h"
+#include "kamekLoader.hpp"
 #include <Kamek/kamek.hpp>
 #include <System/dvd.hpp>
 #include <System/system.hpp>

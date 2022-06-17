@@ -1,5 +1,4 @@
 #include <Kamek/kamek.hpp>
-#include <common.hpp>
 #include <nw4r/ut/ut.hpp>
 #include <nw4r/snd/snd.hpp>
 #include <Sound/musichandler.hpp>
@@ -63,6 +62,7 @@ void MusicSpeedup(RaceRSARSoundHandler *soundHandler, u32 jingle, u32 r5){
 kmCall(0x8070b2f8, &MusicSpeedup);
 kmWrite32(0x8070b2c0, 0x60000000);
 kmWrite32(0x8070b2d4, 0x60000000);
+
 
 int CheckChannelCount(UnkType *r3, u32 channel, nw4r::snd::StrmSound *strmSound){
     u32 id = strmSound->soundId;

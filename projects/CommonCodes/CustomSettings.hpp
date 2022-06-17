@@ -1,8 +1,9 @@
 #pragma once
 #include <Kamek/kamek.hpp>
-#include <UI/Screen/SpecificScreens/Options.hpp>
 #include <UI/Ctrl/Action.hpp>
 #include <UI/Screen/ParentScreenBases.hpp>
+#include <UI/Screen/SpecificScreens/Options.hpp>
+#include <UI/Screen/SpecificScreens/WFCMain.hpp>
 #include <UI/Screen/SpecificScreens/VSSettings.hpp>
 #include <ParamsHolder.hpp>
 
@@ -16,8 +17,23 @@ public:
     virtual void OnInit();
     void ExpandedHandleClick(PushButton *pushButton, u32 r5);
 
-    PushButton newButton;
+    PushButton settingsButton;
 };
+
+class ExpandedWFCMainScreen : public WFCMainScreen {
+public:
+    ExpandedWFCMainScreen(){
+        this->onSettingsClick.subject = this;
+        this->onSettingsClick.ptmf = &ExpandedWFCMainScreen::HandleSettingsClick;
+        this->onSelectHandler.ptmf = static_cast<void (WFCMainScreen::*)(PushButton*)>(&ExpandedWFCMainScreen::ExpandedHandleSelectButton);
+    }
+    virtual void OnInit();
+    void HandleSettingsClick(PushButton *PushButton, u32 r5);
+    void ExpandedHandleSelectButton(PushButton *pushButton);
+    PtmfHolder_2A<ExpandedWFCMainScreen, void, PushButton*, u32> onSettingsClick;
+    PushButton settingsButton;
+};
+
 
 class TextUpDownValueControlwID : public TextUpDownValueControl{
 public:
@@ -28,7 +44,7 @@ public:
 
 class CustomSettingsPanel : public InteractableScreen {
 public:
-    CustomSettingsPanel(u32 radioCount, u32 scrollersCount);
+    CustomSettingsPanel(u32 radioCount, u32 scrollersCount, u8 buttonsPerRow[8], u8 optionsPerScroller[8]); //max 8 radios and 8 scrollers per instance
     virtual ~CustomSettingsPanel();
     virtual void OnInit(); //To be defined
     virtual void ClearInstance(); //80853a8c
@@ -87,6 +103,7 @@ public:
     RadioButtonChangeHandler *onRadioButtonChangeHandler;
     RadioButtonSelectHandler *onRadioButtonSelectHandler;
     u32 radioCount;
+    u8 buttonsPerRow[8];
     UpDownControl *upDownControls;
     UpDownChangeHandler *onUpDownChangeHandler; //0x1E00 //when you scroll
     UpDownClickHandler *onUpDownClickHandler; //0x1E04
@@ -94,4 +111,5 @@ public:
     TextUpDownValueControlwID *textUpDownwID; //0x1984
     UpDownDisplayedTextScrollHandler *textOnScrollHandler; //when you scroll
     u32 scrollersCount;
+    u8 optionsPerScroller[8];
 };

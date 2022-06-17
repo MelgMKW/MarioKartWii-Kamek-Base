@@ -2,7 +2,6 @@
 
 #include <Kamek/kamek.hpp>
 #include <egg/egg.hpp>
-#include <common.hpp>
 #include <base/rvl_sdk.hpp>
 
 class LakituControllerPlayer;

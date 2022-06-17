@@ -6,6 +6,7 @@
 #include <UI/Screen/SpecificScreens/DriftSelect.hpp>
 #include <UI/Screen/SpecificScreens/Voting.hpp>
 #include <UI/Screen/SpecificScreens/Timer.hpp>
+extern u32 ptmfVtable;
 
 ptmfHolder votingSTARThandler;
 bool hasStartbeenPressed = false;
@@ -41,7 +42,7 @@ void PatchPtmfVotingScreen(Scene *scene, ScreenType id){
     votingSTARThandler.ptmf.this_delta = 0x0;
     votingSTARThandler.ptmf.vtableOffset = -1;
     votingSTARThandler.ptmf.functionPointer = &OnStartPress;
-    votingScreen->pushButton.actionHolder.actionHandlers[START_PRESS] = &votingSTARThandler;
+    votingScreen->pushButton.actionHolder.actionHandlers[START_PRESS] = (&votingSTARThandler); 
 
     CountDownScreen *timerScreen = (CountDownScreen*) scene->screens[TIMER];
     UITimer *timer = &timerScreen->timer;

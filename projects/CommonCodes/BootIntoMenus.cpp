@@ -4,7 +4,9 @@
 #include <UI/menudata.hpp>
 #include <Race/racedata.hpp>
 #include <ParamsHolder.hpp>
+#include <project.hpp>
 
+#ifdef BOOTMENUS
 u16 controllerOnStrap = 0x112;
 asm int ControllerOnStrapPress(){
     ASM(
@@ -88,3 +90,5 @@ void SetUpCorrectController(RealControllerHolder *realControllerHolder, void* in
     return;
 }
 kmCall(0x805243f4, &SetUpCorrectController);
+
+#endif

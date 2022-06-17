@@ -16,7 +16,7 @@ public:
     PtmfHolder_2A<OptionsScreen, void, PushButton*, u32> onClick; //0x44 vtable 808ba45c 805fd90c
     ptmfHolder onBackPress; //0x58 vtable 808ba450 805fda80
     ScreenActionController screenActionController; //0x6C
-    CtrlMenuPageTitleText ctrlMenuPageTitleText; //0x290
+    CtrlMenuPageTitleText topText; //0x290
     PushButton gcnRumble; //0x404
     PushButton nintendoWiFi; //0x658
     PushButton AddMarioKartChannel; //0x8ac

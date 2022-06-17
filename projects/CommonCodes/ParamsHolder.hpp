@@ -13,15 +13,19 @@ class Settings0{
 class Settings1{ 
 public:
     Settings1(){
-        magic[0] = 'V';
-        magic[1] = 'P';
+        magic[0] = 'T';
+        magic[1] = 'E';
+        magic[2] = 'S';
+        magic[3] = 'T';
         version = curVersion;
         settingsRadioCount = 3;
     };
     Settings1(Settings0 *oldSettings) //in case a new file needs to get built
     {
-        magic[0] = 'V';
-        magic[1] = 'P';
+       magic[0] = 'T';
+       magic[1] = 'E';
+       magic[2] = 'S';
+       magic[3] = 'T';
         version = curVersion;
         settingsRadioCount = 3;
     }

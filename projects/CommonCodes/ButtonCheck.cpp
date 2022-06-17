@@ -1,6 +1,7 @@
 #include <Kamek/kamek.hpp>
 #include <Input/inputdata.hpp>
 #include <UI/menudata.hpp>
+#include <project.hpp>
 
 #define CHECK_BUTTON(universal, specific) \
     case universal: return (inputs & specific) != 0;

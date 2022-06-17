@@ -1,6 +1,9 @@
 #include <Kamek/kamek.hpp>
 #include <egg/egg.hpp>
 #include <System/system.hpp>
+#include <project.hpp>
+
+#ifdef NANDSZSLOADER
 
 void* NANDSZSLoader(char *path, void* buffer, EGG::Heap *heap, u32 allocDirection, u32 offset, u32 r8, u32 *sizeTmp){
     s32 fd = -1;
@@ -25,4 +28,4 @@ void* NANDSZSLoader(char *path, void* buffer, EGG::Heap *heap, u32 allocDirectio
     return EGG::LoadToMainRam(path, buffer, heap, allocDirection, offset, r8, sizeTmp);
 }
 kmCall(0x80518e94, &NANDSZSLoader);
-kmWrite32(0x80857aa0, 0x60000000); //disable ghost cannot be saved message
+#endif

@@ -6,11 +6,19 @@ extern const u8 buttonsPerRow[6];
 extern const u8 optionsPerScroller[6];
 
 
+
 void AddSettingsScreen(Scene *scene, ScreenType id){
     scene->CreateScreen(id);
     scene->CreateScreen(VS_SETTINGS);
 }
 kmCall(0x8062fe24, &AddSettingsScreen);
+kmCall(0x8062dbbc, &AddSettingsScreen);
+kmCall(0x8062dd60, &AddSettingsScreen);
+kmCall(0x8062df04, &AddSettingsScreen);
+kmCall(0x8062e228, &AddSettingsScreen);
+kmCall(0x8062e3cc, &AddSettingsScreen);
+
+
 
 ExpandedOptionsScreen *CreateExpandedOptionsScreen(){
     return new(ExpandedOptionsScreen);
@@ -22,17 +30,26 @@ kmWrite32(0x805fd754,0x60000000); //nop the InitControl call in the init func
 void ExpandedOptionsScreen::OnInit(){
     this->InitControlGroup(5 + customButtons);
     OptionsScreen::OnInit();
-    this->AddControl(this->controlGroup.controlCount - 1, &newButton, 0);
+    this->AddControl(this->controlGroup.controlCount - 1, &settingsButton, 0);
 
-    this->newButton.InitButton("button", "OptionTopButton", "Settings", 1, 0, false);
+    this->settingsButton.InitButton("button", "OptionCustomButton", "Settings", 1, 0, false);
 
-    this->newButton.buttonId = 5;
-    this->newButton.SetOnClickHandler(&this->onClick, 0);
+    this->settingsButton.buttonId = 5;
+    this->settingsButton.SetOnClickHandler(&this->onClick, 0);
+    this->settingsButton.SelectButton(0);
 }
+
+void PatchOptionsBRCTR(PushButton *button, char *folderName, char *ctrName, char *variant, u32 playerCount, u32 r8, bool inaccessible){
+    button->InitButton(folderName, "OptionCustomButton", variant, playerCount, r8, inaccessible);
+}
+kmCall(0x805fd7bc, &PatchOptionsBRCTR); //so that the positions are correct
+kmCall(0x805fd80c, &PatchOptionsBRCTR);
+kmCall(0x805fd858, &PatchOptionsBRCTR);
+
 
 void ExpandedOptionsScreen::ExpandedHandleClick(PushButton *pushButton, u32 r5){
     if (pushButton->buttonId == 5){
-        this->nextScreenId = (ScreenType) 0x73;
+        this->nextScreenId = VS_SETTINGS;
         this->EndStateAnimate(pushButton->GetAnimationFrameSize(), 0);
     }
     else{
@@ -40,15 +57,45 @@ void ExpandedOptionsScreen::ExpandedHandleClick(PushButton *pushButton, u32 r5){
     }
 }
 
+ExpandedWFCMainScreen *CreateExpandedWFCMainScreenn(){
+    return new(ExpandedWFCMainScreen);
+};
+kmCall(0x8062405c, &CreateExpandedWFCMainScreenn);
+kmWrite32(0x80624050,0x60000000); //nop the original new
+kmWrite32(0x8064b984,0x60000000); //nop the InitControl call in the init func
 
+void ExpandedWFCMainScreen::OnInit(){
+    this->InitControlGroup(6 + 1);
+    WFCMainScreen::OnInit();
+    this->AddControl(this->controlGroup.controlCount - 1, &settingsButton, 0);
 
-CustomSettingsPanel::CustomSettingsPanel(u32 radioButtonsCount, u32 scrollerButtonsCount){
+    this->settingsButton.InitButton("button", "WFCMainCustomButton", "Settings", 1, 0, false);
+
+    this->settingsButton.buttonId = 6;
+    this->settingsButton.SetOnClickHandler(&this->onSettingsClick, 0);
+    this->settingsButton.SetOnSelectHandler(&this->onSelectHandler);
+}
+
+void ExpandedWFCMainScreen::HandleSettingsClick(PushButton *pushButton, u32 r5){
+    this->nextScreenId = VS_SETTINGS;
+    this->EndStateAnimate(pushButton->GetAnimationFrameSize(), 0);
+}
+
+void ExpandedWFCMainScreen::ExpandedHandleSelectButton(PushButton *pushButton){
+    if (pushButton->buttonId == 6) this->bottomText.SetMsgId(0x2501, 0);
+    else this->HandleSelectButton(pushButton);
+}
+
+CustomSettingsPanel::CustomSettingsPanel(u32 radioButtonsCount, u32 scrollerButtonsCount, u8 buttonsPerRow[8], u8 optionsPerScroller[8]){
     externObjectsCount = 1;
     layoutCount = radioButtonsCount + scrollerButtonsCount;
     hasBackButton = false;
     titleBmgId = 0x3FFF;
     nextScreenId = SCREEN_NONE;
-    prevScreenId = OPTIONS;
+    MenuType id = menuData->curScene->menuId;
+    if (id == OPTIONS_MENU) prevScreenId = OPTIONS;
+    else if ((id == P1_WIFI)||(id == P1_WIFI_GLOBE_DISCONNECT)||(id == P1_WIFI_FROM_FIND_FRIEND)
+    || (id == P2_WIFI) || (id == P2_WIFI_GLOBE_DISCONNECT)) prevScreenId = WFC_MAIN_SCREEN;
     nextMenu = MENU_NONE;
     controlSources = 2;
     loadPrevMenuHandler.ptmf = (&InteractableScreen::LoadPrevMenu);
@@ -76,7 +123,9 @@ CustomSettingsPanel::CustomSettingsPanel(u32 radioButtonsCount, u32 scrollerButt
     this->screenActionController.SetHandler(BACK_PRESS, (ptmfHolder*)(&onBackPress), false, false);   
     localPlayerCount = 1;
     radioCount = radioButtonsCount;
+    memcpy(this->buttonsPerRow, buttonsPerRow, 8);
     scrollersCount = scrollerButtonsCount;
+    memcpy(this->optionsPerScroller, optionsPerScroller, 8);
 };
 
 
@@ -153,7 +202,7 @@ void CustomSettingsPanel::InitLayout(u32 id){
             variant = "RadioRow3";
             optionVariants = optionVariantsRow3;
         }
-        radioButtonControl->InitLayout(buttonsPerRow[id], params->settings.radioSetting[id], "control", "SettingsRadioBase", variant, "SettingsRadioOption", optionVariants, 1, 0, 0);
+        radioButtonControl->InitLayout(this->buttonsPerRow[id], params->settings.radioSetting[id], "control", "SettingsRadioBase", variant, "SettingsRadioOption", optionVariants, 1, 0, 0);
         radioButtonControl->SetOnChangeHandler(this->onRadioButtonChangeHandler);
         radioButtonControl->SetOnSelectHandler(this->onRadioButtonSelectHandler);
         radioButtonControl->id = id;
@@ -170,7 +219,7 @@ void CustomSettingsPanel::InitLayout(u32 id){
         char *variant = "UpDown0";
         if (id == 1) variant = "UpDown1";
 
-        upDownControl->InitLayout(optionsPerScroller[id], params->settings.scrollSetting[id], "control", "SettingsUpDownBase", variant, "SettingsUpDownButtonR", "RightButton",
+        upDownControl->InitLayout(this->optionsPerScroller[id], params->settings.scrollSetting[id], "control", "SettingsUpDownBase", variant, "SettingsUpDownButtonR", "RightButton",
         "SettingsUpDownButtonL", "LeftButton", (UpDownDisplayedText*) &this->textUpDownwID[id], 1, 0, false, true, true);
         //edit the brctr variants if there are multiple scrollers
 

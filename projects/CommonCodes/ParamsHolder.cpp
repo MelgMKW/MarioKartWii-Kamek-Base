@@ -4,11 +4,11 @@
 #include <project.hpp>
 
 ParamsHolder *ParamsHolder::sInstance = NULL;
-
+extern char *settingsBinName;
 ParamsHolder::ParamsHolder(){
     Settings1 *buffer = (Settings1*) EGG::Heap::alloc(sizeof(Settings1), 0x20, 0);
 
-    char *path = "settings.bin";
+    char *path = settingsBinName;
     NANDFileInfo info;
     u32 length = 0;
 
@@ -22,7 +22,7 @@ ParamsHolder::ParamsHolder(){
     };
     code = NANDRead(&info, buffer, length);
     if (code >= NAND_CODE_OK){
-        if(strcmp(buffer->magic, "VP") == 0){
+        if(strcmp(buffer->magic, "TEST") == 0){
             if (buffer->version == curVersion){
                 memcpy(&this->settings, buffer,sizeof(Settings1));
                 NANDClose(&info);
@@ -50,7 +50,7 @@ void CreateParamsHolder(){
 static BootHook CreateParams(CreateParamsHolder);
 
 void ParamsHolder::SaveSettings(){
-    char *path = "settings.bin";
+    char *path = settingsBinName;
     NANDFileInfo info;
     s32 code = NANDOpen(path, &info, NAND_MODE_READ_WRITE);
     if (code == NAND_CODE_OK) {

@@ -10,10 +10,10 @@ Contributors:
   Melg (battle score attribute)
 */
 #pragma once
-#include <Race/random.hpp>
 #include <Kamek/kamek.hpp>
+#include <System/timer.hpp>
 #include <Input/inputdata.hpp>
-#include <common.hpp>
+#include <Race/random.hpp>
 
 class GmDataAbstract {
 public:

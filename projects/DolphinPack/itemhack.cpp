@@ -7,7 +7,6 @@
 #include <project.hpp>
 
 u32 currentItem;
-
 const ItemId items[16] = {
     GOLDEN_MUSHROOM,
     THUNDER_CLOUD,

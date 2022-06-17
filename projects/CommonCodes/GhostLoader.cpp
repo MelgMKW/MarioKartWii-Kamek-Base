@@ -5,6 +5,7 @@
 #include <UI/Screen/SpecificScreens/GhostManager.hpp>
 #include <UI/Screen/SpecificScreens/GhostSelect.hpp>
 
+#ifdef GHOSTLOADER
 void* LoadRKG(char *path, void *buffer, EGG::Heap *heap, u32 allocDirection, u32 offset, u32 r8, u32 *r9){
     char *occurrence = strstr(path, "ghost");
     s32 fd = -1;
@@ -51,3 +52,5 @@ kmCall(0x8000b5ac, &LoadRKG);
 kmCall(0x8054284c, &LoadCustomStaffGhost);
 kmWrite32(0x805E237C, 0x38600002); //easy and experts are displayed no matter what
 kmWrite32(0x805E2B0C, 0x38000000); //remove nintendo "flag"
+
+#endif

@@ -10,6 +10,7 @@ People
 #include <Kamek/kamek.hpp>
 #include <Input/inputdata.hpp>
 #include <Misc/Mii.hpp>
+#include <Race/racedata.hpp>
 
 class Screen;
 class ControllerHolder;
@@ -195,7 +196,7 @@ DISCONNECTS_YOU                                        =0x87,
 SEEMS_TO_DRAW_BEHIND_ONLINE_RACES_PANEL_2              =0x88,
 ERROR_CONNECTING_TO_WFC                                =0x89,
 DUMMY_SEEMS_TO_REDIRECT_TO_0X52                        =0x8A,
-WFC_MENU                                               =0x8B,
+WFC_MAIN_SCREEN                                        =0x8B,
 WFC_VSBATTLE_SELECT                                    =0x8C,
 FRIENDS_MENU                                           =0x8D,
 FRIENDS_MENU_MARIO_KART_CHANNEL                        =0x8E,
