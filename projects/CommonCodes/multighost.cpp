@@ -32,16 +32,18 @@ void CustomGhostGroup::Init(){
         u32 index = 0;
         char path[0x10];
         RKG *buffer = (RKG*) EGG::Heap::alloc(0x2800, 0x20, 0);
-        for (int i = 0; i < fileCount; i++){
+        for (int i = 0; i < 100; i++){
+            if(index >= fileCount) break;
             snprintf(path, 0x10, "/Ghosts/%02d.rkg", i);
             fd = ISFSOpen(path, 1);
             if(fd >= 0){
                 FileStats fileStats __attribute((aligned (0x20)));
                 ISFSGetFileStats(fd, &fileStats);
                 ISFSRead(fd, buffer, fileStats.fileSize);
-                this->files[i].Init(buffer);
-                this->files[i].type = (GhostType) 0x27;
+                this->files[index].Init(buffer);
+                this->files[index].type = (GhostType) 0x27;
                 ISFSClose(fd);
+                index++;
             }
         }
         delete(buffer);
