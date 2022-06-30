@@ -1,6 +1,7 @@
 #pragma once
 #include <Kamek/kamek.hpp>
 #include <nw4r/lyt/lyt.hpp>
+#include <System/fileformats.hpp>
 
 class Screen;
 class MainLayout;
@@ -22,12 +23,14 @@ public:
     float speed; //0x8
     u8 unknown_0xC;
     u8 unknown_0xD[3];
-};
+}; //total size 0x10
 
 class PaneGroup{
 public:
     PaneGroup(); //0x8063c844
-    void DisplayAnimation(u32 id, float value);
+    void PlayAndDisableAnimation(u32 id, float value);
+    void PlayAnimation(u32 id, float frame);
+    void PlayAnimationAt(u32 id, float frame);
     GroupAnims *groupAnims;
     u32 animationsCount;
     nw4r::lyt::Group group;
@@ -36,13 +39,13 @@ public:
     u8 unknown_0x36[2];
     u32 currentAnimation;
     float unknown_0x3C[2];
-};
+}; //total size 0x44
 
 class UIAnimator{
 public:
     UIAnimator(); //0x8063c3ec
     void CreatePaneGroups(u32 groupCount); //0x8063c470
-    PaneGroup *PaneGroupById(u32 id);
+    PaneGroup *GetPaneGroupById(u32 id);
     PaneGroup *paneGroups; //array of pane groups
     u32 animationCount; //Unsure
     nw4r::lyt::Pane *rootPane;
@@ -64,7 +67,7 @@ public:
 class ParentScreenLayout{
 public:
     virtual ~ParentScreenLayout(); //vtable 808b950c
-    nw4r::lyt::Layout layout; //from 0x0 to 0x0
+    nw4r::lyt::Layout layout; //from 0x14 to 0x24
     UnkType *pointer1_0x24;    //0x24
 }; //Total size 0x28
 
@@ -121,10 +124,12 @@ public:
     virtual char* getClassName(); //how the class name was found
     virtual void func_0x30();
     virtual void func_805bd2d8(); //just a blr
+
+    void PlaySound(u32 soundId, u32 r5);
     PositionAndScale positionAndscale[4]; //same structs repeats itself 4 times, but only the last one seems to do anything?
-    ControlGroup *parentCtrl; //0x64 points to the parent class holding all screens 
-    ControlGroup childrenCtrlGroup; 
-    u32 drawPriority; //setting this to anything but 0 removes the element
+    ControlGroup *parentGroup; //0x64 points to the parent class holding all screens 
+    ControlGroup childrenGroup; 
+    float drawPriority; //setting this to anything but 0 removes the element
     bool isHidden;
     u8 unknown_0x81[0x84-0x81];
     bool unknown_0x84;
@@ -151,22 +156,30 @@ public:
     virtual void func_0x38(); //called screen_buttonHolder too
     void SetText(u32 bmgId, ScreenText *text);
     void SetMsgId(u32 bmgId, ScreenText *text);
-    UIAnimator animator;
-    MainLayout layout;
+    UIAnimator animator; //0x98
+    MainLayout layout; //0xA8
     BMGThing bmgThing1;
     BMGThing bmgThing2;
     UnkType *pointer_0x16C;
     u32 unknown_0x170;
 };//Total Size 0x174
 
+//total size 0xC
 class ControlLoader{
 public:
-    LayoutUIControl *layoutUIControl;
     ControlLoader(LayoutUIControl *control);
     void Load(char *folderName, char *ctrName, char *variant, const char **animNames);
     ~ControlLoader();
-    u8 unknown_0x4[0x28-0x4];
-
+    LayoutUIControl *layoutUIControl;
+    void *brctrRawFile; //0x4
+    BRCTRAnimSubHeader *animSubHeader;
+    BRCTRAnimGroup *groups; //0xC
+    BRCTRAnimation *animations; //0x10
+    BRCTRLayoutSubHeader *layoutSubHeader;
+    BRCTRVariant *variants;
+    BRCTRMessage *messages;
+    BRCTRPicture *pictures;
+    void *nameTable;
 };//Total Size 0x28
 
 class CtrlRaceBase : public LayoutUIControl { //one element is one CtrlRaceBase
@@ -256,7 +269,7 @@ public:
     u32 unknown_0x178; //result of 805f5a98, which seems to be the init func
     bool unknown_0x17C;
     u8 unknown_0x17D[3]; //might be padding
-};
+}; //total size 0x180
 
 class VehicleModelControl : public NoteModelControl{ //this c
 public:
@@ -276,3 +289,9 @@ public:
     float unknown_0x184; //some sort of scale factor for the transition
 };//total size 0x188
 
+class VoteControl : public LayoutUIControl{
+public:
+    VoteControl(); //80642aac
+    virtual ~VoteControl(); //80642ae8
+    u8 unknown_0x174[0x178-0x174];
+};

@@ -9,8 +9,8 @@ public:
     virtual ~VSSettingScreen(); //80853b10 vtable 0x808da3c8
     ScreenActionController screenActionController; //0x430
     u32 controlCount; //0x654
-    PtmfHolder_1A<VSSettingScreen, void, PushButton*> onNextScreenButtonPress; //0x658 vtable 808bd18c 80853654
-    PtmfHolder_1A<VSSettingScreen, void, PushButton*> onNextScreenButtonSelect; //0x66C vtable 808bd18c virtual off 0x64
+    PtmfHolder_1A<VSSettingScreen, void, LayoutUIControl*> onNextScreenButtonPress; //0x658 vtable 808bd18c 80853654
+    PtmfHolder_1A<VSSettingScreen, void, LayoutUIControl*> onNextScreenButtonSelect; //0x66C vtable 808bd18c virtual off 0x64
     PtmfHolder_0A<VSSettingScreen, void> onNextScreenButtonDeselect; //0x680 vtable 808bd18c 808536b0
     PtmfHolder_0A<VSSettingScreen, void> onBackPress; //0x694 vtable 808bd18c 808536b4
     PtmfHolder_0A<VSSettingScreen, void> onStartPress; //0x6A8 vtable 808bd18c virtual off 0x7C

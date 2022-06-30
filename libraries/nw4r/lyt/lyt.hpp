@@ -10,7 +10,6 @@ namespace nw4r{
 
 		class AnimTransform;
 		class AnimResource;
-		class AnimationLink;
 		class ResourceAccessor;
 		class Group;
 		class GroupContainer;
@@ -26,8 +25,10 @@ namespace nw4r{
 		}; //total size 0x2c
 
 		class AnimTransformBasic{ //inherited from something vtable 802737e4
+		public:
 			AnimTransformBasic(); //80082a00
 			virtual void func_vtable(); //0x802737c0
+			int GetFrameSize(); //0x800829d0
 			ut::LinkListNode node;
 			void *pai1RawData; //of the BRLAN
 			u32 unknown_0x4[3];
@@ -37,6 +38,9 @@ namespace nw4r{
 			u16 animationCount; //from pai1
 			u8 unknown_0x1E[2];
 		}; //total size 0x20
+		class AnimationLink{
+			nw4r::ut::LinkList linkList;
+		};
 
 		namespace detail {
 			class TexCoordAry {
@@ -122,13 +126,21 @@ namespace nw4r{
 
 		class Material {
 		public:
-			virtual ~Material();
+			Material(); //8007f660
+			virtual ~Material(); //vtable 80273780
+			nw4r::lyt::AnimationLink animationLink;
+			RGBA16 colours;
+			RGBA16 colours2;
+			RGBA16 colours3;
 
 			// cheating a bit here
-			u8 _[0x3C];
+			u8 unknown_0x28[0x38-0x28]; //could be a char?
+			u32 unknown_0x38; //bitflags 800803e4
+			u32 unknown_0x3C;
 			// this is actually a pointer to more stuff, not just texmaps
 			TexMap *texMaps;
-		}; // 0x44
+			char *name; //0x48
+		}; // total size 0x5C
 
 		class Pane {
 		public:

@@ -37,7 +37,6 @@ typedef volatile u8 vu8;
 typedef volatile f64 vf64;
 typedef volatile f32 vf32;
 typedef int UnkType;
-
 typedef unsigned long size_t;
 
 #define NODE_TO_ITEM(node, type, field) \
@@ -112,16 +111,13 @@ struct PtmfHolder_3A : PtmfHolderBase_3A<Ret, A1, A2, A3> {
     }
 };
 
-
 #ifdef __INTELLISENSE__
-inline void * operator new(unsigned long long,  void * ptr) { return ptr; }
 #define ASM(...)
 #define asm
 #define __attribute(...)
 #define __sync(...)
 #define __isync(...)
 #else
-inline void * operator new(size_t size,  void * ptr) { return ptr; }
 #define ASM(...) __VA_ARGS__
 #endif
 

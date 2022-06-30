@@ -54,6 +54,10 @@ typedef f32 Mtx43[4][3];
 typedef f32 Mtx34[3][4];
 typedef struct { f32 x, y, z, w; } Quaternion;
 
+struct RGBA16{
+  u16 red, green, blue, alpha; 
+};
+
 void PSMTXIdentity(Mtx matrix);
 void PSMTXCopy(const Mtx source, Mtx dest);
 void PSMTXConcat(const Mtx sourceA, const Mtx sourceB, Mtx dest);

@@ -1,0 +1,171 @@
+<wiidisc version="1">
+	<id game="RMC"/>    
+	<options>
+		<section name="Dolphin Testing Pack">
+			<option name="Testing Pack">
+				<choice name="Enabled">
+					<patch id="loadpack" />
+				</choice>
+			</option>
+			<option name="My Stuff">
+				<choice name="Enabled">
+					<patch id="MyStuff" />
+				</choice>
+			</option>
+		</section>
+		
+	</options>
+	
+	<patch id="loadpack">
+		<memory valuefile="/TestingPack/codes/Loader.bin" offset="0x80004000"/>
+		<folder external="/TestingPack/codes" disc="/kamek" create="true"/>
+		<memory offset="0x8000A3F4" value="4BFF9C1C" original="4e800020" /> <!--RMCP-->
+		<memory offset="0x8000A3B4" value="4BFF9C5C" original="4e800020" /> <!--RMCE-->
+		<memory offset="0x8000A350" value="4BFF9CC0" original="4e800020" /> <!--RMCJ-->
+		<memory offset="0x8000A4FC" value="4BFF9B14" original="4e800020" /> <!--RMCK-->
+		
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_E.szs" />
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_U.szs" />
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_I.szs" />
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_S.szs" />
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_K.szs" />
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_J.szs" />
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_F.szs" />
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_G.szs" />
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_Q.szs" />
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_M.szs" />
+		<file external="/TestingPack/files/MenuSingle_E.szs" disc="MenuSingle_R.szs" />
+		
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_E.szs" />
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_U.szs" />
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_I.szs" />
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_S.szs" />
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_K.szs" />
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_J.szs" />
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_F.szs" />
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_G.szs" />
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_Q.szs" />
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_M.szs" />
+		<file external="/TestingPack/files/Race_E.szs" disc="Race_R.szs" />
+		
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_E.szs" />
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_U.szs" />
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_I.szs" />
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_S.szs" />
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_K.szs" />
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_J.szs" />
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_F.szs" />
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_G.szs" />
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_Q.szs" />
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_M.szs" />
+		<file external="/TestingPack/files/Channel_E.szs" disc="Channel_R.szs" />
+	</patch>
+	
+	<patch id="MyStuff">
+		<folder external="/TestingPack/My Stuff" disc="/sound" />
+		<folder external="/TestingPack/My Stuff" disc="/Race" />
+		<folder external="/TestingPack/My Stuff" disc="/Scene/Model" />
+		<folder external="/TestingPack/My Stuff" disc="/thp" />
+		
+		<file external="/TestingPack/My Stuff/Award.szs" disc="Award.szs" />
+		<file external="/TestingPack/My Stuff/Award_E.szs" disc="Award_E.szs" />
+		<file external="/TestingPack/My Stuff/Award_U.szs" disc="Award_U.szs" />
+		<file external="/TestingPack/My Stuff/Award_I.szs" disc="Award_I.szs" />
+		<file external="/TestingPack/My Stuff/Award_S.szs" disc="Award_S.szs" />
+		<file external="/TestingPack/My Stuff/Award_K.szs" disc="Award_K.szs" />
+		<file external="/TestingPack/My Stuff/Award_J.szs" disc="Award_J.szs" />
+		<file external="/TestingPack/My Stuff/Award_F.szs" disc="Award_F.szs" />
+		<file external="/TestingPack/My Stuff/Award_G.szs" disc="Award_G.szs" />
+		<file external="/TestingPack/My Stuff/Award_Q.szs" disc="Award_Q.szs" />
+		<file external="/TestingPack/My Stuff/Award_M.szs" disc="Award_M.szs" />
+		<file external="/TestingPack/My Stuff/Award_R.szs" disc="Award_R.szs" />
+		
+		<file external="/TestingPack/My Stuff/BackModel.szs" disc="BackModel.szs" />
+		
+		<file external="/TestingPack/My Stuff/Channel.szs" disc="Channel.szs" />
+		
+		<file external="/TestingPack/My Stuff/Event.szs" disc="Event.szs" />  
+		<file external="/TestingPack/My Stuff/Event_E.szs" disc="Event_E.szs" />
+		<file external="/TestingPack/My Stuff/Event_U.szs" disc="Event_U.szs" />
+		<file external="/TestingPack/My Stuff/Event_I.szs" disc="Event_I.szs" />
+		<file external="/TestingPack/My Stuff/Event_S.szs" disc="Event_S.szs" />
+		<file external="/TestingPack/My Stuff/Event_K.szs" disc="Event_K.szs" />
+		<file external="/TestingPack/My Stuff/Event_J.szs" disc="Event_J.szs" />
+		<file external="/TestingPack/My Stuff/Event_F.szs" disc="Event_F.szs" />
+		<file external="/TestingPack/My Stuff/Event_G.szs" disc="Event_G.szs" />
+		<file external="/TestingPack/My Stuff/Event_Q.szs" disc="Event_Q.szs" />
+		<file external="/TestingPack/My Stuff/Event_M.szs" disc="Event_M.szs" />
+		<file external="/TestingPack/My Stuff/Event_R.szs" disc="Event_R.szs" />
+		
+		<file external="/TestingPack/My Stuff/Font.szs" disc="Font.szs" />  
+		<file external="/TestingPack/My Stuff/Font_K.szs" disc="Font_K.szs" />
+		
+		<file external="/TestingPack/My Stuff/Globe.szs" disc="Globe.szs" />  
+		<file external="/TestingPack/My Stuff/Globe_E.szs" disc="Globe_E.szs" />
+		<file external="/TestingPack/My Stuff/Globe_U.szs" disc="Globe_U.szs" />
+		<file external="/TestingPack/My Stuff/Globe_I.szs" disc="Globe_I.szs" />
+		<file external="/TestingPack/My Stuff/Globe_S.szs" disc="Globe_S.szs" />
+		<file external="/TestingPack/My Stuff/Globe_K.szs" disc="Globe_K.szs" />
+		<file external="/TestingPack/My Stuff/Globe_J.szs" disc="Globe_J.szs" />
+		<file external="/TestingPack/My Stuff/Globe_F.szs" disc="Globe_F.szs" />
+		<file external="/TestingPack/My Stuff/Globe_G.szs" disc="Globe_G.szs" />
+		<file external="/TestingPack/My Stuff/Globe_Q.szs" disc="Globe_Q.szs" />
+		<file external="/TestingPack/My Stuff/Globe_M.szs" disc="Globe_M.szs" />
+		<file external="/TestingPack/My Stuff/Globe_R.szs" disc="Globe_R.szs" />
+		
+		<file external="/TestingPack/My Stuff/MenuMulti.szs" disc="MenuMulti.szs" />  
+		<file external="/TestingPack/My Stuff/MenuMulti_E.szs" disc="MenuMulti_E.szs" />
+		<file external="/TestingPack/My Stuff/MenuMulti_U.szs" disc="MenuMulti_U.szs" />
+		<file external="/TestingPack/My Stuff/MenuMulti_I.szs" disc="MenuMulti_I.szs" />
+		<file external="/TestingPack/My Stuff/MenuMulti_S.szs" disc="MenuMulti_S.szs" />
+		<file external="/TestingPack/My Stuff/MenuMulti_K.szs" disc="MenuMulti_K.szs" />
+		<file external="/TestingPack/My Stuff/MenuMulti_J.szs" disc="MenuMulti_J.szs" />
+		<file external="/TestingPack/My Stuff/MenuMulti_F.szs" disc="MenuMulti_F.szs" />
+		<file external="/TestingPack/My Stuff/MenuMulti_G.szs" disc="MenuMulti_G.szs" />
+		<file external="/TestingPack/My Stuff/MenuMulti_Q.szs" disc="MenuMulti_Q.szs" />
+		<file external="/TestingPack/My Stuff/MenuMulti_M.szs" disc="MenuMulti_M.szs" />
+		<file external="/TestingPack/My Stuff/MenuMulti_R.szs" disc="MenuMulti_R.szs" />
+		
+		<file external="/TestingPack/My Stuff/MenuOther.szs" disc="MenuOther.szs" />  
+		<file external="/TestingPack/My Stuff/MenuOther_E.szs" disc="MenuOther_E.szs" />
+		<file external="/TestingPack/My Stuff/MenuOther_U.szs" disc="MenuOther_U.szs" />
+		<file external="/TestingPack/My Stuff/MenuOther_I.szs" disc="MenuOther_I.szs" />
+		<file external="/TestingPack/My Stuff/MenuOther_S.szs" disc="MenuOther_S.szs" />
+		<file external="/TestingPack/My Stuff/MenuOther_K.szs" disc="MenuOther_K.szs" />
+		<file external="/TestingPack/My Stuff/MenuOther_J.szs" disc="MenuOther_J.szs" />
+		<file external="/TestingPack/My Stuff/MenuOther_F.szs" disc="MenuOther_F.szs" />
+		<file external="/TestingPack/My Stuff/MenuOther_G.szs" disc="MenuOther_G.szs" />
+		<file external="/TestingPack/My Stuff/MenuOther_Q.szs" disc="MenuOther_Q.szs" />
+		<file external="/TestingPack/My Stuff/MenuOther_M.szs" disc="MenuOther_M.szs" />
+		<file external="/TestingPack/My Stuff/MenuOther_R.szs" disc="MenuOther_R.szs" />
+		
+		<file external="/TestingPack/My Stuff/MenuSingle.szs" disc="MenuSingle.szs" />
+		
+		<file external="/TestingPack/My Stuff/Present.szs" disc="Present.szs" />  
+		<file external="/TestingPack/My Stuff/Present_E.szs" disc="Present_E.szs" />
+		<file external="/TestingPack/My Stuff/Present_U.szs" disc="Present_U.szs" />
+		<file external="/TestingPack/My Stuff/Present_I.szs" disc="Present_I.szs" />
+		<file external="/TestingPack/My Stuff/Present_S.szs" disc="Present_S.szs" />
+		<file external="/TestingPack/My Stuff/Present_K.szs" disc="Present_K.szs" />
+		<file external="/TestingPack/My Stuff/Present_J.szs" disc="Present_J.szs" />
+		<file external="/TestingPack/My Stuff/Present_F.szs" disc="Present_F.szs" />
+		<file external="/TestingPack/My Stuff/Present_G.szs" disc="Present_G.szs" />
+		<file external="/TestingPack/My Stuff/Present_Q.szs" disc="Present_Q.szs" />
+		<file external="/TestingPack/My Stuff/Present_M.szs" disc="Present_M.szs" />
+		<file external="/TestingPack/My Stuff/Present_R.szs" disc="Present_R.szs" />
+		<file external="/TestingPack/My Stuff/Race.szs" disc="Race.szs" />  
+		
+		<file external="/TestingPack/My Stuff/Title.szs" disc="Title.szs" />  
+		<file external="/TestingPack/My Stuff/Title_E.szs" disc="Title_E.szs" />
+		<file external="/TestingPack/My Stuff/Title_U.szs" disc="Title_U.szs" />
+		<file external="/TestingPack/My Stuff/Title_I.szs" disc="Title_I.szs" />
+		<file external="/TestingPack/My Stuff/Title_S.szs" disc="Title_S.szs" />
+		<file external="/TestingPack/My Stuff/Title_K.szs" disc="Title_K.szs" />
+		<file external="/TestingPack/My Stuff/Title_J.szs" disc="Title_J.szs" />
+		<file external="/TestingPack/My Stuff/Title_F.szs" disc="Title_F.szs" />
+		<file external="/TestingPack/My Stuff/Title_G.szs" disc="Title_G.szs" />
+		<file external="/TestingPack/My Stuff/Title_Q.szs" disc="Title_Q.szs" />
+		<file external="/TestingPack/My Stuff/Title_M.szs" disc="Title_M.szs" />
+		<file external="/TestingPack/My Stuff/Title_R.szs" disc="Title_R.szs" />		
+	</patch>
+</wiidisc>

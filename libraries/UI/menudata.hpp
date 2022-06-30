@@ -11,6 +11,7 @@ People
 #include <Input/inputdata.hpp>
 #include <Misc/Mii.hpp>
 #include <Race/racedata.hpp>
+#include <System/timer.hpp>
 
 class Screen;
 class ControllerHolder;
@@ -23,11 +24,14 @@ typedef enum ControllerType{
 };
 
 typedef enum GhostType {
+    GHOST_NONE = 0x0,
     BEST_TIME=0x1,
-    CONTINENTAL_RECORD=0x2,
     WORLD_RECORD=0x2,
+    CONTINENTAL_RECORD=0x3,
     FLAG_GHOST=0x4,
+    SPECIAL_GHOST=0x5, //no idea what this is
     GHOST_RACE=0x6,
+    FRIEND_GHOST=0x24, //from 0x07 to 0x24
     EASY_STAFF_GHOST=0x25,
     EXPERT_STAFF_GHOST=0x26
 };
@@ -169,8 +173,8 @@ VEHICLE_SELECT                                         =0x6C,
 DRIFT_SELECT                                           =0x6D,
 CUP_SELECT                                             =0x6E,
 COURSE_SELECT_SUB_SCREEN                               =0x6F,
-SELECT_GHOST                                           =0x70,
-SELECT_GHOST2                                          =0x71,
+SELECT_GHOST_UNKNOWN                                   =0x70,
+SELECT_GHOST                                           =0x71,
 SELECT_SOLOTEAM_VS                                     =0x72,
 VS_SETTINGS                                            =0x73,
 TEAMS_OVERVIEW                                         =0x74,
@@ -440,6 +444,48 @@ public:
 
 };//Total Size 0x408
 
+class GhostHeader {
+public:
+    GhostHeader(); //8051c270
+    GhostHeader(RKG *rkg); //8051c398
+    void Init(RKG *rkg); //8051c790
+    bool headerIsValid;
+    u8 unknown_0x1;
+    wchar_t userData[11]; //emulating wide chars
+    MiiData miiData;
+    u8 lapCount;
+    u8 unknown_0x65[3];
+    Timer lapTimes[5];
+    Timer finishTime;
+    CharacterId characterId;
+    VehicleId vehicleId;
+    CourseId courseId;
+    ControllerId controllerId;
+    u8 year;
+    u8 month;
+    u8 day;
+    u8 unknown_0xC3;
+    GhostType type;
+    bool isDriftAuto;
+    u8 unknown_0xc9[3];
+    u32 location;
+    u32 inputSize;
+    void *inputs;
+}; //total size 0xd8
+
+class SavedGhostsHandler {
+public:
+    SavedGhostsHandler(); //806209e8
+    void Init(); //80634ec0
+    void RequestBestTimeGhost(u32 licenseId, u32 r5, u32 r6, CourseId courseId, bool r8); //80621c78
+    void RequestDLdGhost(u32 r4, u32 id, CourseId courseId, bool r7); //80621c3c
+    u8 unknown_0x0[0x8-0x0];
+    u32 unknown_0x8[3];
+    u8 unknown_0x14[0x24-0x14];
+    GhostHeader header;
+    u8 unknown_0xFC[0x128-0xFC];
+}; //total size 0x128
+
 struct MenuData98{
 public:
 	u8 unknown_0x0[0x60];
@@ -463,7 +509,8 @@ public:
 	u8 unknown_0x2D4[0x3C4 - 0x2D4];
 	GhostType ghostType;
 	CourseId courseId;
-	u8 unknown_0x3CC[0x4B4 - 0x3CC];
+    u32 licenseId;
+	u8 unknown_0x3D0[0x4B4 - 0x3d0];
     u32 willGhostSave; //0x4B4
     u8 unknown_0x4B8[0x4E8-0x4B8];
 	u8 licenseNum;
@@ -500,7 +547,7 @@ public:
     u32 transitionFrame;
     MenuState transitionState;
     MenuDataSub sub; /* length is uncertain */
-    u32 *field17_0x90; /* 0x128 struct */
+    SavedGhostsHandler *savedGhostsHandler; /* 0x128 struct */
     u32 *field18_0x94; /* 0x14 struct */
     MenuData98 *menudata98;
 }; //Total Size 0x9C

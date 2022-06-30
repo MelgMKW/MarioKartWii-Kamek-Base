@@ -231,7 +231,7 @@ namespace nw4r{
 			u32 blockChunkID;
 			u32 currentlyStreamedBlockID;
 			u32 loopBlockID; //ID of the block that matches the loopStartSample
-			u32 lastBlockID; //block count -1 //0x160
+			u32 lastBlockID; 
 			u8 unknown_0x164[0x170-0x164];
 			UnkStrmClass class_0x170; //unknown class 80274ae8
 			u32 unknown_0x19c; //some kind of list thing, idk

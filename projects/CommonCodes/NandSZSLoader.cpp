@@ -1,9 +1,9 @@
 #include <Kamek/kamek.hpp>
-#include <egg/egg.hpp>
+#include <system/egg.hpp>
 #include <System/system.hpp>
 #include <project.hpp>
 
-#ifdef NANDSZSLOADER
+#if NANDSZSLOADER == 1
 
 void* NANDSZSLoader(char *path, void* buffer, EGG::Heap *heap, u32 allocDirection, u32 offset, u32 r8, u32 *sizeTmp){
     s32 fd = -1;

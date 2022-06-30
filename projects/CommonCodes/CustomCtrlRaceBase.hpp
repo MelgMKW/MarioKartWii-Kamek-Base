@@ -58,7 +58,7 @@ public:
         u32 count = 0;
         for (CustomCtrlBuilder * p = sHooks; p; p = p->next){
             p->ctrlCount = p->countCtrls();
-            count += p->countCtrls();  
+            count += p->ctrlCount;  
         }
         return count;
     }

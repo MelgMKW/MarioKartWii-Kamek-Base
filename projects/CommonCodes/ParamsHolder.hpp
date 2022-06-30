@@ -2,7 +2,7 @@
 #pragma once
 #include <Kamek/kamek.hpp>
 #include <System/system.hpp>
-#include <egg/egg.hpp>
+#include <system/egg.hpp>
 #define customButtons 1
 #define curVersion 1
 

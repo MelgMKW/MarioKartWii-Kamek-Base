@@ -8,6 +8,8 @@
 #include <Model/model.hpp>
 #include <project.hpp>
 
+#if ENHANCEDREPLAY == 1
+
 extern "C"{
     void StoreFlapIntoSave(UnkType *saveDataManagerLicense, UnkType *timer, u32 r5, CourseId id);
 }
@@ -149,3 +151,5 @@ asm void PatchSoundIssues(){
     )
 }
 kmCall(0x80716064, &PatchSoundIssues);
+
+#endif

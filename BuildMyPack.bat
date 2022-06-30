@@ -26,14 +26,14 @@ for %%f in (projects/CommonCodes/*.cpp) do SET "COMMONCPPFILES=%%~nf !COMMONCPPF
 SET OBJECTS=
 FOR %%H IN (%CPPFILES%) DO (
     echo "Compiling %%H.cpp..."
-    %CC% %CFLAGS% -c -o "projects/%SOURCE%/build/%%H.o" "projects/%SOURCE%/%%H.cpp"
+    %CC% %CFLAGS% %DEFINE% -c -o "projects/%SOURCE%/build/%%H.o" "projects/%SOURCE%/%%H.cpp"
     SET "OBJECTS=projects/%SOURCE%/build/%%H.o !OBJECTS!"
 )
 
 SET COMMONOBJECTS=
 FOR %%H IN (%COMMONCPPFILES%) DO (
     echo "Compiling %%H.cpp..."
-    %CC% %CFLAGS% -c -o "projects/%SOURCE%/build/%%H.o" "projects/CommonCodes/%%H.cpp"
+    %CC% %CFLAGS% %DEFINE% -c -o "projects/%SOURCE%/build/%%H.o" "projects/CommonCodes/%%H.cpp"
     SET "COMMONOBJECTS=projects/%SOURCE%/build/%%H.o !COMMONOBJECTS!"
 )
 

@@ -1,15 +1,18 @@
 #pragma once
 #include <Kamek/kamek.hpp>
-#include <egg/egg.hpp>
+#include <system/egg.hpp>
 
 class AudioManager;
 class GXRModeObj;
 class SceneManager;
 
+
+
 struct Video{
     GXRModeObj *mode;
     u32 unknown[2];
 };//total size 0xc
+
 #define NAND_CODE_OK 0
 #define NAND_CODE_BUSY -3
 #define NAND_CODE_EXISTS -6
@@ -31,6 +34,21 @@ struct NANDFileInfo{
     u8 unknown_0x0[0x90];
 }; //total size 0x90
 
+class NANDSaveManager{
+public:
+    //ctor inlined at 0x8052be1c
+    EGG::Disposer disposer; //808b3250 also has a virtual dtor
+    virtual ~NANDSaveManager(); //0x8052bf44 vtable 808b3244
+    void Read(void *buffer, u32 size, u32 offset, bool r7); //8052c0b0
+    u8 unknown_0x14;
+    u8 unknown_0x15;
+    u8 unknown_0x16[2]; //padding?
+    u32 unknown_0x18;
+    UnkType *saveBanner; //pointer to savebanner.tpl
+    u32 *array;
+    UnkType *ptr; //related to banner.bin
+}; //total size 0x28
+extern NANDSaveManager *nandSaveManager;
 
 
 
@@ -66,7 +84,7 @@ public:
     EGG::ExpHeap *EGGRootMEM1; 
     EGG::ExpHeap *EGGRootMEM2; 
     EGG::ExpHeap *EGGRootDebug;
-    EGG::ExpHeap *EGGSystem;  //0x18 
+    EGG::ExpHeap *EGGSystem;  //0x24
     void *heapSystem; //thread
     u32 unknown_0x2C; //just the start of mem1?
     u32 unknown_0x30; //idk
@@ -92,7 +110,7 @@ extern RKSystem rkSystem;
 
 class SystemManager{
 public: 
-    void RipFromDiscAsync(char* path, void *heap, u32 allocDirection, u32 r7, u32 *buffer);
+    void RipFromDiscAsync(char* path, void *heap, u32 allocDirection, u32 r7, void *buffer);
     char rippedPath[64]; //which file to rip from disc, such as ghost, savebanner.tpl etc...
     u8 unknown_0x40[0x58-0x40];
     u32 isWideScreen;
@@ -173,5 +191,6 @@ extern "C"{
     s32 ISFSClose(s32 fd);
     s32 ISFSCreateFile(char *path, u32 r4, u32 r5, u32 r6, u32 r7);
     s32 ISFSWrite(s32 fd, void *buffer, u32 length);
+    s32 ISFSReadDir(char *folder, u32 r4, u32 *num);
     u32 Util_RandInt(u32 low, u32 high);
 }

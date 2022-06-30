@@ -6,6 +6,13 @@
 namespace EGG {
 	class Heap;
 
+	class List{
+		List(); //8022f760
+		virtual ~List(); //8022f720 vtable 802a31bc
+		nw4r::ut::LinkListNode *head;
+		u8 unknown_0x8[4]; //count maybe?
+	}; //total size 0xC
+	
 	class Disposer {
 	public:
 		Disposer();
@@ -79,6 +86,7 @@ namespace EGG {
 		virtual unsigned long resizeForMBlock(void *buffer, u32 newSize);
 		virtual u32 getTotalFreeSize();
 		virtual u32 getAllocatableSize(long alignment);
+
 		u32 adjust();
 
 	};
@@ -117,3 +125,25 @@ namespace EGG {
 		u32 unknown_0x4[2];
 	}; //total size 0xC
 }
+
+#ifdef __INTELLISENSE__
+inline void * operator new(unsigned long long size, EGG::Heap *heap)
+{
+	return heap->alloc(size, 0x4);
+}
+inline void * operator new[](unsigned long long size, EGG::Heap *heap)
+{
+    return heap->alloc(size, 0x4);
+}
+inline void * operator new(unsigned long long,  void * ptr) { return ptr; }
+#else
+inline void * operator new(size_t size, EGG::Heap *heap)
+{
+	return heap->alloc(size, 0x4);
+}
+inline void * operator new[](size_t size, EGG::Heap *heap)
+{
+    return heap->alloc(size, 0x4);
+}
+inline void * operator new(size_t size,  void * ptr) { return ptr; }
+#endif

@@ -22,7 +22,3 @@ public:
     bool isMultiplayer;
     u8 unknown_0xE[0x10-0xE];
 };//total size 0x10
-
-struct RKG{
-    u8 unknown[0x2800];
-};//total size 0x2800

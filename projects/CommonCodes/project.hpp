@@ -4,9 +4,11 @@
 #include <UI/menudata.hpp>
 
 #ifdef __INTELLISENSE__
-#define NANDSZSLOADER
-#define GHOSTLOADER
-#define BOOTMENUS
+#define NANDSZSLOADER 1
+#define GHOSTLOADER 1
+#define BOOTMENUS 1
+#define MULTIGHOST 1
+#define WIIMMFI 1
 #else
 #endif
 

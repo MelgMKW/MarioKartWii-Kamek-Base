@@ -3,7 +3,7 @@ Stebler, CLF (main documentation)
 */
 #pragma once
 #include <Kamek/kamek.hpp>
-#include <egg/egg.hpp>
+#include <system/egg.hpp>
 #include <Race/playerholder.hpp>
 
 enum ItemObjectId{

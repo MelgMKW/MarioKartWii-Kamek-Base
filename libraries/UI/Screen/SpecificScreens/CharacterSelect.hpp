@@ -3,6 +3,7 @@
 #include <Kamek/kamek.hpp>
 #include <UI/Screen/base.hpp>
 #include <UI/Screen/ParentScreenBases.hpp>
+#include <UI/Ctrl/Action.hpp>
 
 class CtrlMenuCharacterSelect: public LayoutUIControl{
 public:
@@ -38,7 +39,7 @@ public:
     u8 unknown_0x1A6[2];
     u32 unknown_0x1a8; //init at 4
     u32 unlockedCharactersCount; // 0x1a if all unlocked 0x1AC
-    UnkType *array_0x1B0; //seems to be a class inherited from PushButton ctor 807e2808 vtable 808D3074
+    ButtonDriver *driverButtonsArray; //seems to be a class inherited from PushButton ctor 807e2808 vtable 808D3074
     u32 unknown_0x1B4; 
     ptmfHolder ptmfHolder_0x1B8; //vtable = 0x808bd2c4 function = 807e35fc (onBtnClick)
     ptmfHolder ptmfHolder_0x1CC; //vtable = 0x808bd2c4 function = 807e36f4 (onSelect)

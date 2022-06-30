@@ -1,7 +1,8 @@
 settings = 0x80004004
 memcpy = 0x80005f34
-RipFromDiscAsync__13SystemManagerFPcPvUiUiPUi = 0x8000b308
+RipFromDiscAsync__13SystemManagerFPcPvUiUiPv = 0x8000b308
 snprintf = 0x80011938
+qsort = 0x80011b00
 swprintf = 0x80017814
 sscanf = 0x80013040
 strcmp = 0x8001329c
@@ -60,12 +61,14 @@ DVDConvertPathToEntryNum = 0x8015DF4C
 DVDOpen = 0x8015e2bc
 DVDClose = 0x8015e568
 DVDReadPrio = 0x8015e834
+ISFSReadDir = 0x8016a05c
 ISFSCreateFile = 0x8016ac74
 ISFSOpen = 0x8016AE5C
 ISFSGetFileStats = 0x8016afdc
 ISFSRead = 0x8016B1FC
 ISFSClose = 0x8016B384
 ISFSWrite = 0x8016b2c0
+
 
 PSVECAdd = 0x8019abe4
 PSVECMag = 0x8019ac68
@@ -95,10 +98,17 @@ systemManager = 0x80386000
 
 ##Documented Classes
 #nw4r
+#ut
+Seek__Q34nw4r2ut13DVDFileStreamFUiUi = 0x800b05e0
+
+#lyt
+GetFrameSize__Q34nw4r3lyt18AnimTransformBasicFv = 0x800829d0
+
+#snd
 OpenExtStream__Q34nw4r3snd15DVDSoundArchiveFPQ44nw4r3snd15DVDSoundArchive13DVDFileStreamUiPcUiUi = 0x800912c0
 InitHeadData__Q34nw4r3snd13DVDFileReaderFPQ34nw4r3snd12HEADdatabase = 0x800a5490
 DetailUtilCalcRandom__Q24nw4r3sndFv = 0x800ad050
-Seek__Q34nw4r2ut13DVDFileStreamFUiUi = 0x800b05e0
+
 
 
 #EGG
@@ -106,9 +116,23 @@ LoadToMainRam__3EGGFPcPvPQ23EGG4HeapUiUiUiPUi = 0x802226d8
 alloc__Q23EGG4HeapFUliPQ23EGG4Heap = 0x80229814
 free__Q23EGG4HeapFPvPQ23EGG4Heap = 0x80229b84
 
+#RKG
+ClearBuffer__3RKGFv = 0x8051c088
+CheckValidity__3RKGFv = 0x8051c120
+Decompress__3RKGFP3RKG = 0x8051d1b4
+
+#GhostHeader
+__ct__11GhostHeaderFv = 0x8051c270
+__ct__11GhostHeaderFP3RKG = 0x8051c398
+
+Init__11GhostHeaderFP3RKG = 0x8051c790
 
 #inputData
 StoreCorrectInputDataSub = 0x80521554
+InitGhostController__9InputDataFUcP12RKGInputDatab = 0x8052453c
+
+#NandSaveManager
+Read__15NANDSaveManagerFPvUiUib = 0x8052c0b0
 
 #Timer
 __dt__5TimerFv = 0x8051c334
@@ -123,7 +147,10 @@ __dt__14RaceinfoPlayerFv = 0x80532f48
 DisplayLap__11LakituModelFf = 0x8055a938
 
 #Mii
+#MiiHeadsModel
 InitModel__13MiiHeadsModelFP3MiiP13ModelDirectorUiUiUiUi =0x8055c580
+#MiiGroup
+Add__8MiiGroupFUcP7MiiData = 0x805fa610
 
 #Cameras 
 SetProjection__17RaceCameraManagerFUiUi = 0x80566020
@@ -167,6 +194,8 @@ getClassName = 0x8063d3c0
 func_0x30 = 0x8063d608
 func_805bd2d8__9UIControlFv = 0x805bd2d8
 
+PlaySound__9UIControlFUiUi = 0x8063d74c
+
 #LayoutUIControl
 __vt__15LayoutUIControl = 0x808befb4
 __ct__15LayoutUIControlFv = 0x8063d798
@@ -174,8 +203,8 @@ __dt__15LayoutUIControlFv = 0x8063d8c0
 Init__15LayoutUIControlFv = 0x8063dac0
 Update__15LayoutUIControlFv = 0x8063DB00
 Draw__15LayoutUIControlFv = 0x8063DB84
-GetStaticInstanceAddr = 0x80606bd0
-getClassName = 0x8063d788
+GetStaticInstanceAddr__15LayoutUIControlFv = 0x80606bd0
+getClassName__15LayoutUIControlFv = 0x8063d788
 func_0x30__15LayoutUIControlFv = 0x8063E61c
 func_0x38__15LayoutUIControlFv = 0x8063D954
 SetText__15LayoutUIControlFUiP10ScreenText = 0x807e9a38
@@ -188,9 +217,12 @@ dtControlGroup = 0x805c2400
 #UIAnimator
 UIAnimator = 0x8063c3ec
 dtAnimationThing = 0x8063c404
-PaneGroupById__10UIAnimatorFUi = 0x8063c820
+GetPaneGroupById__10UIAnimatorFUi = 0x8063c820
+
 #PaneGroup
-DisplayAnimation__9PaneGroupFUif = 0x8063cb20
+PlayAndDisableAnimation__9PaneGroupFUif = 0x8063cb20
+PlayAnimation__9PaneGroupFUif = 0x8063c91c
+PlayAnimationAt__9PaneGroupFUif = 0x8063ca98
 
 #BMGThing
 GetMsgId__8BMGThingFi = 0x805f8c88
@@ -203,6 +235,11 @@ StartTransition__8MenuDataFUiUi = 0x80635ac8
 BuildScreens__5SceneF8MenuType = 0x8062c3a4
 CreateScreen__5SceneF10ScreenType = 0x80622d08
 
+#SavedGhostsHandler
+RequestBestTimeGhost__18SavedGhostsHandlerFUiUiUi8CourseIdb = 0x80621c78
+RequestDLdGhost__18SavedGhostsHandlerFUiUi8CourseIdb = 0x80621c3c
+LoadStaffGhost = 0x805427bc
+
 #PushButton
 __ct__10PushButtonFv = 0x805bd3a8
 __dt__10PushButtonFv  = 0x805bd4b0
@@ -213,9 +250,24 @@ SetOnClickHandler__10PushButtonFP37PtmfHolderBase_2A<v,P10PushButton,Ui>Uc =0x80
 SetOnSelectHandler__10PushButtonFP34PtmfHolderBase_1A<v,P10PushButton> = 0x805bdae0
 SelectButton__10PushButtonFUi = 0x805bdaf0
 InitButton__10PushButtonFPcPcPcUiUib = 0x805bd518
-
 SelectFocus__10PushButtonFv = 0x805bdb58
 GetAnimationFrameSize__10PushButtonFv = 0x805bdf88
+
+#TabControl
+__ct__10TabControlFv = 0x80637ad0
+__dt__10TabControlFv = 0x80637b2c
+Init__10TabControlFv = 0x80637ec0
+Update__10TabControlFv = 0x80637f94
+GetStaticInstanceAddr__10TabControlFv = 0x80638e24
+getClassName__10TabControlFv = 0x80637ac4
+func_0x3C__10TabControlFv = 0x80637d20
+func_0x40__10TabControlFv = 0x80638e20
+
+InitLayout__10TabControlFUiUiPcPcPPCcUibb = 0x80637ba4
+SetOnChangeHandler__10TabControlFP23TabControlChangeHandler = 0x80637d24
+
+#TabControlOptionButton
+ChangeButtonState__22TabControlOptionButtonFb = 0x80638830
 
 #RadioButtonControl
 __ct__18RadioButtonControlFv = 0x80605724
@@ -258,14 +310,21 @@ SetOnChangeHandler__13UpDownControlFP19UpDownChangeHandler = 0x8063f020
 SetOnClickHandler__13UpDownControlFP18UpDownClickHandler = 0x8063f028
 SetOnElementSelectHandler__13UpDownControlFP26UpDownElementSelectHandler = 0x8063f030
 
-#ScreenElementActionHolder
-__vt__25ScreenElementActionHolder = 0x808b9a20
+#ControlActionHolderFv
+__vt__25ControlActionHolderFv = 0x808b9a20
+__ct__19ControlActionHolderFv = 0x805efaf8
+Init__19ControlActionHolderFUibb = 0x805efc48
+SetHandler__19ControlActionHolderF11ScreenInputP10ptmfHolderb = 0x805efcf8
+SetLocalPlayerCount__19ControlActionHolderFUi = 0x805efd14
+SetBorderColours__19ControlActionHolderFP6RGBA16P6RGBA16 = 0x805f03dc
 
 
 
 #ScreenActionController
 __ct__22ScreenActionControllerFv = 0x805f09a8
+__dt__22ScreenActionControllerFv = 0x805f0bd4
 SetHandler__22ScreenActionControllerF11ScreenInputP10ptmfHolderbb = 0x805f0d84
+AddActionHolder__22ScreenActionControllerFP19ControlActionHolder = 0x805f0d44
 
 #CtrlMenuBackButton
 __vt__18CtrlMenuBackButton = 0x808d374c
@@ -377,6 +436,30 @@ GetStaticInstanceAddr = 0x80858c10
 InitCtrlRaceBase__10RaceScreenFUi = 0x80857cc0
 getControlCount = 0x80857b08
 
+#GhostSelectScreen
+__ct__17GhostSelectScreenFv = 0x806395ec
+__dt__17GhostSelectScreenFv = 0x8063982c
+getNextScreen__17GhostSelectScreenFv = 0x8063a4b8
+OnInit__17GhostSelectScreenFv = 0x80639908
+OnLoad__17GhostSelectScreenFv = 0x80639bd0
+OnActivate__17GhostSelectScreenFv = 0x80639d34
+OnResume__17GhostSelectScreenFv = 0x80639d6c
+GetStaticInstanceAddr__17GhostSelectScreenFv = 0x8063a4c0
+HandleWatchReplayPress__17GhostSelectScreenFP10PushButtonUi = 0x8063a3c0
+HandleRightArrowPress__17GhostSelectScreenFP18SheetSelectControlUi = 0x8063a1a4
+HandleLeftArrowPress__17GhostSelectScreenFP18SheetSelectControlUi = 0x8063a2a4
+HandleBackPress__17GhostSelectScreenFUi = 0x8063a444
+
+
+
+
+
+OnInit__17GhostSelectScreenFv = 0x80639908
+
+
+#VSSettingsScreen
+__ct__15VSSettingScreenFv = 0x806284c8
+
 #OptionsScreen 
 __ct__13OptionsScreenFv = 0x805fd518
 __dt__13OptionsScreenFv = 0x805fd638
@@ -387,9 +470,6 @@ OnLoad__13OptionsScreenFv = 0x805fd8e8
 GetStaticInstanceAddr__13OptionsScreenFv = 0x80601068
 HandleClick__13OptionsScreenFP10PushButtonUi = 0x805fd90c
 
-#VSSettingsScreen
-__ct__15VSSettingScreenFv = 0x806284c8
-
 #WFCMainScreen
 __ct__13WFCMainScreenFv = 0x8064b640
 __dt__13WFCMainScreenFv = 0x8064b850
@@ -399,10 +479,37 @@ OnLoad__13WFCMainScreenFv = 0x8064bc90
 GetStaticInstanceAddr__13WFCMainScreenFv = 0x8064d690
 HandleSelectButton__13WFCMainScreenFP10PushButton = 0x8064bf4c
 
+#GhostManagerScreen
+__ct__18GhostManagerScreenFv = 0x805e0c38 
+__dt__18GhostManagerScreenFv = 0x805e0cb8
+OnInit__18GhostManagerScreenFv = 0x805e0d84
+OnLoad__18GhostManagerScreenFv = 0x805e0ffc
+OnUnload__18GhostManagerScreenFv = 0x805e1100
+OnActivate__18GhostManagerScreenFv = 0x805e10f8
+OnDefocus__18GhostManagerScreenFv = 0x805e10fc
+AfterChildUpdate__18GhostManagerScreenFv = 0x805e1104
+func_0x58__18GhostManagerScreenFv = 0x805e1108
+RequestGhost__18GhostManagerScreenFUc = 0x805e1998
+GetStaticInstanceAddr__18GhostManagerScreenFv = 0x805e2720
+SetupGhostReplay__18GhostManagerScreenFUi = 0x805e1d5c
+SetupGhostRace__18GhostManagerScreenFUiUiUi = 0x805e1b04
+
+
+#GhostList
+Init__9GhostListF8CourseId = 0x805e2200
+InitMenudata98Params__9GhostListFUi = 0x805e2588
+
+#GhostListEntry
+Compare__14GhostListEntryFPCvPCv = 0x805e2430
+
+#GhostGroup
+GetGhostHeader__10GhostGroupFUs = 0x8051d084
+
+
 #Sound
 GetCourseMusicSlot = 0x807101f4
 ChangeMusic__12MusicHandlerF9RaceState = 0x80711ac4
-PlayBRSARSound__20RaceRSARSoundHandlerFUiUi = 0x80716608
+PlayBRSARSound__16RaceSoundHandlerFUiUi = 0x80716608
 
 #Item
 Update__19ItemHolderPlayerSubFv = 0x80795668
@@ -438,13 +545,21 @@ bulletBillSpeed = 0x808b59f8
 starSpeed = 0x808B5CAC
 megaMushroomTCSpeed = 0x808B5CBC
 
+#Misc
+CourseIdToGhostIndex = 0x80552d90
+GetCourseIdBySlot = 0x80552e74
+groupTypeSaveOffset = 0x80890d28
+trackNbrToCourseID = 0x80895238 #called by tracktocupID
+trackToCourseIDTable = 0x808a1d80
+
 
 #Static Instances
-trackToCourseIDTable = 0x808a1d80
 controller__3KMP = 0x809BD6E8
 inputData = 0x809bd70c
+nandSaveManager = 0x809bd720
 raceData = 0x809bd728
 raceInfo = 0x809bd730
+saveDataManager = 0x809bd748
 cameraHandler = 0x809C1868
 playerHolder = 0x809c18f8
 kartParams = 0x809c1918

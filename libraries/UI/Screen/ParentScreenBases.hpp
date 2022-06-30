@@ -3,18 +3,16 @@
 #include <UI/Screen/base.hpp>
 #include <Misc/Mii.hpp>
 #include <UI/Ctrl/Ctrl.hpp>
+#include <UI/Ctrl/Action.hpp>
 
-struct UnkArray{
-    u8 unknown_0x0[0x104-0x0]; //each element is 0x34 bytes long
-}; //Total Size 0x104
 
-class UnkClass2 {
+class ScreenInputThing {
 public:
-    UnkClass2(); //805ef240
-    ~UnkClass2(); //805ef2fc
+    ScreenInputThing(); //805ef240
+    ~ScreenInputThing(); //805ef2fc
     virtual void func_vtable(); //0x808b9a48
     u8 unknown_0x4[0x3C-0x4]; //has an array of something related to inputs
-    UnkArray array;
+    ButtonInfo buttoninfoArray[5];
 }; //Total Size 0x144
 
 class RaceNameClass{
@@ -74,7 +72,7 @@ public:
     u8 unkknown_0x69[0x78-0x69];
     u32 framesAfterFinish; //0x78
     PauseScreen *pauseScreen; //0x7C, only set when in an actual pause
-    UnkClass2 class2;
+    ScreenInputThing inputThing;
     u8 unknown_0x1C4[0x1D0-0x1C4]; //based on all of the new such as 806234f4
     CtrlRaceNameBalloon *ctrlRaceNameBalloonArray; //0x1d0 one per hudslot
     RaceNameClass *balloonClassArray; //0x1D4 one per hudslot

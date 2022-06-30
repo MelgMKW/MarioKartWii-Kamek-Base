@@ -1,5 +1,5 @@
 #pragma once
-#include <egg/egg.hpp>
+#include <system/egg.hpp>
 #include <Kamek/kamek.hpp>
 #include <nw4r/ut/ut.hpp>
 //#include <Misc/Mii.hpp>

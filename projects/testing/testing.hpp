@@ -16,3 +16,12 @@ extern "C"{
 }
 
 int GetLECODEID();
+
+class CustomSOM : public CtrlRaceBase {
+public:
+    virtual void Init();
+    virtual void OnUpdate();
+    void Load();
+};
+u32 CountCustSOM();
+void CreateCustSOM(Screen *screen, u32 index);

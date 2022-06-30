@@ -29,7 +29,7 @@ void BRSAREntrySizePatch(nw4r::snd::DVDSoundArchive::DVDFileStream *stream, u32 
 kmCall(0x80091354, &BRSAREntrySizePatch);
 
 
-void MusicSpeedup(RaceRSARSoundHandler *soundHandler, u32 jingle, u32 r5){
+void MusicSpeedup(RaceSoundHandler *soundHandler, u32 jingle, u32 r5){
     ParamsHolder *params = ParamsHolder::sInstance;
 
     RaceinfoPlayer *localPlayer = raceInfo->players[(&raceData->main)->scenarios[0].settings.hudPlayerIds[0]];

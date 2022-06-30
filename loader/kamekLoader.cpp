@@ -2,7 +2,7 @@
 #include <Kamek/kamek.hpp>
 #include <System/dvd.hpp>
 #include <System/system.hpp>
-#include <egg/egg.hpp>
+#include <system/egg.hpp>
 
 struct KBHeader {
 	u32 magic1;

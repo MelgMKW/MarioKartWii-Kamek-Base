@@ -13,7 +13,9 @@ References:
 
 #pragma once
 #include <Kamek/kamek.hpp>
+#include <system/egg.hpp>
 #include <Misc/Mii.hpp>
+#include <System/fileformats.hpp>
 
 enum VehicleId
 {
@@ -267,8 +269,8 @@ public:
     s8 localPlayerNum;
     s8 realControllerId; // id of the controller at the console for this player, -1 if not controlled by one
     u8 unknown_0x7; // possibly padding
-    VehicleId vehicleId; // http://wiki.tockdom.com/wiki/List_of_Identifiers#Vehicles
-    CharacterId characterId; // http://wiki.tockdom.com/wiki/List_of_Identifiers#Characters
+    VehicleId vehicleId; // http://wiki.tockdom.com/wiki/List_of_Identifiers#Vehicles 0x8
+    CharacterId characterId; // http://wiki.tockdom.com/wiki/List_of_Identifiers#Characters 0xC
     PlayerType playerType; //0x10
     Mii mii; //0x14
     Team team;
@@ -291,23 +293,23 @@ public:
     // vtable 808b3288
     virtual ~RacedataScenario();
     u8 playerCount;
-    u8 unknown_0x5;
     u8 localPlayerCount;
+    u8 localPlayerCount2;
     u8 unknown_0x7;
     RacedataPlayer players[12];
     RacedataSettings settings;
     u8 mission[0x70]; // 0x70 struct, see http://wiki.tockdom.com/wiki/Mission_Mode#mission_single.kmt
-    void * ghost; // Scenario 0 points to the one you race, 1 points to one I'm not sure about, 2 points to null
+    RKG *rkg; // Scenario 0 points to the one you race, 1 points to one I'm not sure about, 2 points to null
 }; // Total size 0xbf0
 
 class RacedataMain {
 public:
   // Always constructed inline, functions seem to always be members of Racedata rather than specifically RacedataMain
 
-  //vtable 808b3260 (empty)  
-  virtual void unknown_vtable();
+  //vtable 808b3260 (empty)
+  virtual void empty_vtable();
   RacedataScenario scenarios[3]; // 0 is in race, 1 is in menu, not sure what 2 is
-  u8 ghosts[2*0x2800]; // 0x2800 size each, 0 is the one you're racing, not sure what 1 is, see http://wiki.tockdom.com/wiki/RKG_(File_Format)
+  RKG ghosts[2]; // 0x2800 size each, 0 is the one you're racing, not sure what 1 is, see http://wiki.tockdom.com/wiki/RKG_(File_Format)
 };  // Total size 0x73d4
 
 // ParameterFile size is 0x1c, Racedata's is /boot/menuset.prm
@@ -318,14 +320,14 @@ public: // vtable override 808b3268
     static void destroyStaticInstance(); // 8052ffe8
 
     virtual ~Racedata(); // 80530038
-    virtual int FUN_80009ddc();
-    virtual int FUN_80532078(); // just a blr
-    virtual int FUN_80532074(); // just a blr
-    virtual int FUN_80532070(); // just a blr
+    virtual void RKParameterFileProcess(EGG::ExpHeap *heap);
+
+    virtual void FUN_80532078(); // just a blr
+    virtual void FUN_80532074(); // just a blr
+    virtual void FUN_80532070(); // just a blr
     // Always constructed inline
     
     u8 unknown_0x4[0x1c - 0x4];
-  
     RacedataMain main;
 };  // Total size 0x73f0
 

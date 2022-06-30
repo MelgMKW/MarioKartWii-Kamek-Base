@@ -309,7 +309,7 @@ void CustomSettingsPanel::HandleOnUpDownClick(UpDownControl *upDownControl, u32 
 }
 
 void CustomSettingsPanel::HandleOnTextBoxSelect(TextUpDownValueControlTextControl *text, u32 optionId){
-    TextUpDownValueControlwID *valueControl = (TextUpDownValueControlwID*) text->parentCtrl->parentControl;
+    TextUpDownValueControlwID *valueControl = (TextUpDownValueControlwID*) text->parentGroup->parentControl;
     u32 bmgId = 0x4000 + ((valueControl->id + 1) << 8)+ optionId;
     text->SetText(bmgId, 0); //might need to figure out a way to pass the id
     bmgId += 0x10;

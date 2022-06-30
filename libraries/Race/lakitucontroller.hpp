@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Kamek/kamek.hpp>
-#include <egg/egg.hpp>
+#include <system/egg.hpp>
 #include <base/rvl_sdk.hpp>
 
 class LakituControllerPlayer;

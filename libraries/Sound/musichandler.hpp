@@ -1,5 +1,5 @@
 #pragma once
-#include <egg/egg.hpp>
+#include <system/egg.hpp>
 #include <Race/racedata.hpp>
 #include <Kamek/kamek.hpp>
 #include <System/timer.hpp>
@@ -13,8 +13,12 @@ typedef enum RaceState{
 	RACEFINISHED = 0x7
 };
 
-struct TrackToCourseID{
+struct CourseNbrToCourseID{
 	CourseId courseID;
+};
+
+struct CourseIDToMusicID{
+	u32 musicID;
 };
 
 class MusicHandlerSub{
@@ -43,8 +47,10 @@ public:
 };//Total Size 0x178
 
 extern MusicHandler *musicHandler;
-extern TrackToCourseID trackToCourseIDTable[42];
+extern CourseNbrToCourseID trackNbrToCourseID[42];
+extern CourseIDToMusicID trackToCourseIDTable[42]; //battle
+ 
 
 extern "C"{
-	CourseId GetCourseMusicSlot();
+	u32 GetCourseMusicSlot();
 }

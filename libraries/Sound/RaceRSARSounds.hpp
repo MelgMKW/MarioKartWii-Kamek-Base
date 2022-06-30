@@ -10,9 +10,9 @@ this class handles in race BRSAR sounds that are not:
 so stuff like the position tracker, the lap transition sound, the roulette spinning etc...
 */
 
-class RaceRSARSoundHandler{ //inherited from something else
+class RaceSoundHandler{ //inherited from something else
 public:
-    RaceRSARSoundHandler(); //inlined 80713f14
+    RaceSoundHandler(); //inlined 80713f14
     virtual void func_vtable(); //vtable 808c9088 parent = 808c90e8
     bool PlayBRSARSound(u32 soundId, u32 r5);
     u8 unknown_0x4[4];
@@ -26,6 +26,6 @@ public:
 }; //total size 0x1C
 
 
-extern RaceRSARSoundHandler *raceRSARSoundHandler; //809c2850
+extern RaceSoundHandler *raceRSARSoundHandler; //809c2850
 
 extern u32 currentlyPlayingSoundID[0x10]; //809c2840

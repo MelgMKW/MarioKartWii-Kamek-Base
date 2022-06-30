@@ -6,7 +6,7 @@
 #include <ParamsHolder.hpp>
 #include <project.hpp>
 
-#ifdef BOOTMENUS
+#if BOOTMENUS == 1
 u16 controllerOnStrap = 0x112;
 asm int ControllerOnStrapPress(){
     ASM(

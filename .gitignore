@@ -4,7 +4,6 @@
 /.vscode
 /vp
 /projects/MyPack
-/projects/DolphinPack
 
 
 # Compiled Object files
@@ -36,3 +35,7 @@
 *.exe
 *.out
 *.app
+projects/testing/build/E.bin
+projects/testing/build/K.bin
+projects/testing/build/P.bin
+projects/testing/build/J.bin

@@ -1,7 +1,7 @@
 #pragma once
 #include <nw4r/snd/snd.hpp>
 #include <Kamek/kamek.hpp>
-#include <egg/egg.hpp>
+#include <system/egg.hpp>
 
 class SoundArchive{ //place holder name
 public:

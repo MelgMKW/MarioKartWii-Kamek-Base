@@ -2,6 +2,11 @@
 
 #include <Kamek/kamek.hpp>
 
+class MiiData{
+    u8 raw[74];
+    u16 crc16;
+}; //total size 0x4C
+
 class Mii{ //has stuff like sex, type etc.. most likely
     Mii(u32 r4); //80525f88
     virtual void func_vtable(); //808b3148
@@ -16,8 +21,10 @@ class Mii{ //has stuff like sex, type etc.. most likely
 }; //total size 0xB8
 
 class MiiGroup{ 
+public:
     MiiGroup();//805f9e78 vtable 808b9f68
-    virtual void func_vtable();
+    virtual ~MiiGroup(); //805f9f58 vtable 808b9f68
+    void Add(u8 index, MiiData *data); //805fa610
     Mii **mii; //pointer to the array of the miis loader
     u8 unknown_0x8[0x98-0x8];
 }; //Total Size 0x98

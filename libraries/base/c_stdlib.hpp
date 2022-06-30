@@ -90,6 +90,9 @@ size_t wcslen(const wchar_t *);
 wchar_t *wmemchr(const wchar_t, wchar_t, size_t);
 wchar_t *wmemcpy(wchar_t *, const wchar_t *, size_t);
 
+
+void qsort(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void*));
+
 #ifdef __cplusplus
 }
 #endif

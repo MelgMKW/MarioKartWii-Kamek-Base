@@ -8,12 +8,17 @@
 #include <UI/Screen/SpecificScreens/Timer.hpp>
 extern u32 ptmfVtable;
 
-ptmfHolder votingSTARThandler;
+PtmfHolder_2A<LayoutUIControl, void, u32, u32> votingSTARThandler;
 bool hasStartbeenPressed = false;
 
-void OnStartPress(PushButton *pushButton){
+class DummyControl : public PushButton{
+public:
+    void OnStartPress(u32 handlerId, u32 r5);
+};
+
+void DummyControl::OnStartPress(u32 handlerId, u32 r5){
     hasStartbeenPressed = true;
-    pushButton->HandleClick(0, -1);
+    this->HandleClick(0, -1);
 }
 
 void AddChangeComboScreens(Scene *scene, ScreenType id){
@@ -37,11 +42,7 @@ void AddChangeComboScreens(Scene *scene, ScreenType id){
 void PatchPtmfVotingScreen(Scene *scene, ScreenType id){
     scene->CreateScreen(id);
     VotingScreen *votingScreen = (VotingScreen*) scene->screens[PLAYER_LIST_VR_SCREEN];
-    votingSTARThandler.vtable = (u32) &ptmfVtable;
-    votingSTARThandler.subject = &votingScreen->pushButton;
-    votingSTARThandler.ptmf.this_delta = 0x0;
-    votingSTARThandler.ptmf.vtableOffset = -1;
-    votingSTARThandler.ptmf.functionPointer = &OnStartPress;
+    votingSTARThandler.ptmf = static_cast<void(LayoutUIControl::*)(u32, u32)> (&DummyControl::OnStartPress);
     votingScreen->pushButton.actionHolder.actionHandlers[START_PRESS] = (&votingSTARThandler); 
 
     CountDownScreen *timerScreen = (CountDownScreen*) scene->screens[TIMER];

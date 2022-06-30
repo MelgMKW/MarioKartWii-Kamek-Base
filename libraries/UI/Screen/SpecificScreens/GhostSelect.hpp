@@ -29,11 +29,22 @@ class GhostSelectScreen : public Screen { //808bebd8
 public:
     GhostSelectScreen(); //0x806395ec vtable 808bec2c
     virtual ~GhostSelectScreen(); //0x8063982c
+    virtual int getNextScreen(); //8063a4b8
+    virtual void OnInit(); //80639908
+    virtual void OnLoad(); //80639bd0
+    virtual void OnActivate(); //80639d34
+    virtual void OnResume(); //80639d6c
+    virtual int GetStaticInstanceAddr(); //8063a4c0
+
+    void HandleWatchReplayPress(PushButton *button, u32 handlerId);
+    void HandleRightArrowPress(SheetSelectControl *control, u32 handlerId); //8063a1a4
+    void HandleLeftArrowPress(SheetSelectControl *control, u32 handlerId); //8063a2a4
+    void HandleBackPress(u32 handlerId); //8063a444
     ScreenActionController screenactionController; //0x44
     CtrlMenuPageTitleText ctrlMenuPageTitleText; //0x268
     GhostInfoControl ghostInfo; //loads GhostInfo brctr
     GhostInfoControl ghostInfo2; //first for easy, 2nd for expert?
-    ArrowPairControl arrowPairControl; //0x874
+    SheetSelectControl arrowPairControl; //0x874
     LayoutUIControl pageNumber;
     PushButton challengeGhostButton;
     PushButton watchReplayButton;
@@ -41,15 +52,15 @@ public:
     CtrlMenuBackButton backButton; //ends at 1880
     GhostInfoControl *info;
     GhostInfoControl *info2;
-    u32 unknown_0x1884;
-    ptmfHolder ptmfHolder_0x188C; //vtable = 0x808BECC0 function = 8063a1a4 on itself
-    ptmfHolder ptmfHolder_0x18A0; //vtable = 0x808BECC0 function = 8063a2a4 on itself
-    ptmfHolder ptmfHolder_0x18B4; //vtable = 0x808BECa8 function = 8063a3a0 on itself
-    ptmfHolder ptmfHolder_0x18C8; //vtable = 0x808BECa8 function = 8063a3c0 on itself
-    ptmfHolder ptmfHolder_0x18DC; //vtable = 0x808BECa8 function = 8063a3e0 on itself
-    ptmfHolder ptmfHolder_0x18F0; //vtable = 0x808BECa8 function = 8063a400 on itself    
-    ptmfHolder ptmfHolder_0x1904; //vtable = 0x808BEC90 function = 8063a444 on itself
+    u32 selectedButtonId; //0x1888
+    PtmfHolder_2A<Screen, void, SheetSelectControl*, u32> onRightArrowPressHandler;  //8063a1a4 0x188c
+    PtmfHolder_2A<Screen, void, SheetSelectControl*, u32> onLeftArrowPressHandler;  //8063a2a4 0x18a0
+    PtmfHolder_2A<Screen, void, PushButton*, u32> onChallengeGhostClickHandler;  //8063a3a0 0x18B4
+    PtmfHolder_2A<Screen, void, PushButton*, u32> onWatchReplayClickHandler;  //8063a3c0 0x18C8
+    PtmfHolder_2A<Screen, void, PushButton*, u32> onSoloTimeTrialClickHandler; //8063a3e0 0x18DC
+    PtmfHolder_2A<Screen, void, CtrlMenuBackButton*, u32> onBackButtonClickHandler; //8063a444 0x18F0
+    PtmfHolder_1A<Screen, void, u32> onBackPress; //8063a400 0x1904
     GhostList *ghostList; //from screen 0xA7
     u32 page;
-    u32 unknown_0x1920;
+    ScreenType nextScreenId; //0x1920
 }; //total size 0x1924

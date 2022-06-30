@@ -8,6 +8,7 @@ Contributors:
 
 #pragma once
 #include <Kamek/kamek.hpp>
+#include <System/fileformats.hpp>
 enum ControllerId {
     CONTROLLER_Wii_WHEEL = 0x0,
     CONTROLLER_NUNCHUCK = 0x1,
@@ -79,7 +80,7 @@ class InputDataSub3{
 };//total size 0x80 
 
 
-class InputDataSub6{
+class GhostController{
   u8 unknown_0x0[0xa8-0x0];
 };//total size 0xa8
 
@@ -252,6 +253,7 @@ public:
   InputData(); // 805232f0
   virtual ~InputData(); // 805231dc
   // vtable 808b2fc8
+  void InitGhostController(u8 id, RKGInputData *data, bool isAuto); //8052453c
   RealControllerHolder realControllerHolders[4]; // Stores inputs from a real controller at the same console
   VirtualControllerHolder virtualControllerHolders[12]; // Stores inputs for all the other players in a race (I think the ones with a matching realControllerHolder go unused)
   ControllerHolder controllerHolder;
@@ -259,7 +261,7 @@ public:
   InputDataSub3 sub3;
   WiiController wiiControllers[4];
   GCNController gcnControllers[4];
-  InputDataSub6 sub6s[4];
+  GhostController ghostControllers[4];
   u32 inputDatasub7_vt;
   u8 unknown_0x15b4[0x415c-0x4104];
 }; // Total size 0x415c

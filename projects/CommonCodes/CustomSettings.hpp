@@ -25,7 +25,7 @@ public:
     ExpandedWFCMainScreen(){
         this->onSettingsClick.subject = this;
         this->onSettingsClick.ptmf = &ExpandedWFCMainScreen::HandleSettingsClick;
-        this->onSelectHandler.ptmf = static_cast<void (WFCMainScreen::*)(PushButton*)>(&ExpandedWFCMainScreen::ExpandedHandleSelectButton);
+        this->onSelectHandler.ptmf = static_cast<void (WFCMainScreen::*)(PushButton*)> (&ExpandedWFCMainScreen::ExpandedHandleSelectButton);
     }
     virtual void OnInit();
     void HandleSettingsClick(PushButton *PushButton, u32 r5);

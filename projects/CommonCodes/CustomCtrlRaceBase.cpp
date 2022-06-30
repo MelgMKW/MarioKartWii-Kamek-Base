@@ -6,7 +6,7 @@
 #include <UI/Screen/base.hpp>
 #include <UI/Screen/ParentScreenBases.hpp>
 #include <ParamsHolder.hpp>
-#include <CustomCtrl.hpp>
+#include <CustomCtrlRaceBase.hpp>
 #include <project.hpp>
 
 CustomCtrlBuilder *CustomCtrlBuilder::sHooks = NULL;
@@ -23,13 +23,13 @@ kmCall(0x808562d0, &CreateCustomRaceCtrls);
 u32 CountSOM(){
    u32 localPlayerCount = raceData->main.scenarios[0].localPlayerCount;
    MenuType menuId = menuData->curScene->menuId;
-   if(menuId >= WATCH_GHOST_FROM_CHANNEL && menuId <= WATCH_GHOST_FROM_MENU) localPlayerCount+= 1;
+   //if(menuId >= WATCH_GHOST_FROM_CHANNEL && menuId <= WATCH_GHOST_FROM_MENU) localPlayerCount+= 1;
    return localPlayerCount;
 }
 void CreateSOM(Screen *screen, u32 index){
    u32 localPlayerCount = raceData->main.scenarios[0].localPlayerCount;
    MenuType menuId = menuData->curScene->menuId;
-   if(menuId >= WATCH_GHOST_FROM_CHANNEL && menuId <= WATCH_GHOST_FROM_MENU) localPlayerCount+= 1;
+   //if(menuId >= WATCH_GHOST_FROM_CHANNEL && menuId <= WATCH_GHOST_FROM_MENU) localPlayerCount+= 1;
    u8 speedoType = (localPlayerCount == 3) ? 4 : localPlayerCount;
    for (int i = 0; i < localPlayerCount; i++){
       CtrlRaceSpeedo *som = new(CtrlRaceSpeedo);
@@ -69,7 +69,6 @@ void CreateINFODISPLAY(Screen *screen, u32 index){
    CtrlRaceTrackInfoDisplay *info = new(CtrlRaceTrackInfoDisplay);
    screen->AddControl(index, info, 0);
    info->Load();
-
 }
 
 /* SPEEDOMETER */
@@ -83,20 +82,20 @@ void CtrlRaceSpeedo::Load(char* variant, u8 id){ //blatant copy
     "eDecimals", "texture_pattern_0_9_4",NULL, NULL};
 
    loader.Load("game_image", "speedometer", variant, anims);
-   PaneGroup *paneGroup = this->animator.PaneGroupById(0);
-   paneGroup->DisplayAnimation(0, 0.0f);
+   PaneGroup *paneGroup = this->animator.GetPaneGroupById(0);
+   paneGroup->PlayAndDisableAnimation(0, 0.0f);
 
-   paneGroup = this->animator.PaneGroupById(1);
-   paneGroup->DisplayAnimation(0, 0.0f);
+   paneGroup = this->animator.GetPaneGroupById(1);
+   paneGroup->PlayAndDisableAnimation(0, 0.0f);
 
-   paneGroup = this->animator.PaneGroupById(2);
-   paneGroup->DisplayAnimation(0, 0.0f);
+   paneGroup = this->animator.GetPaneGroupById(2);
+   paneGroup->PlayAndDisableAnimation(0, 0.0f);
 
-   paneGroup = this->animator.PaneGroupById(3);
-   paneGroup->DisplayAnimation(0, 0.0f);
+   paneGroup = this->animator.GetPaneGroupById(3);
+   paneGroup->PlayAndDisableAnimation(0, 0.0f);
 
-   paneGroup = this->animator.PaneGroupById(4);
-   paneGroup->DisplayAnimation(0, 0.0f);
+   paneGroup = this->animator.GetPaneGroupById(4);
+   paneGroup->PlayAndDisableAnimation(0, 0.0f);
    return;
 }
 
@@ -132,7 +131,7 @@ void CtrlRaceSpeedo::OnUpdate(){
    float decimals = (float) (engineSpeed % 10 / 1); 
    float dot = 11.0f;
    float units = (float) (engineSpeed % 100 / 10);  
-   float tens; tens = (float) (engineSpeed % 1000 / 100);
+   float tens = (float) (engineSpeed % 1000 / 100);
    float hundreds = (float) (engineSpeed % 10000 / 1000);
    if (engineSpeed < 100){
       hundreds = units;
@@ -148,20 +147,20 @@ void CtrlRaceSpeedo::OnUpdate(){
       dot = decimals;
       decimals = 10.0f;
    }
-   PaneGroup *paneGroup = this->animator.PaneGroupById(3);
-   paneGroup->DisplayAnimation(0, decimals);
+   PaneGroup *paneGroup = this->animator.GetPaneGroupById(3);
+   paneGroup->PlayAndDisableAnimation(0, decimals);
 
-   paneGroup = this->animator.PaneGroupById(4);
-   paneGroup->DisplayAnimation(0, dot);
+   paneGroup = this->animator.GetPaneGroupById(4);
+   paneGroup->PlayAndDisableAnimation(0, dot);
 
-   paneGroup = this->animator.PaneGroupById(2); //third digit
-   paneGroup->DisplayAnimation(0, units);
+   paneGroup = this->animator.GetPaneGroupById(2); //third digit
+   paneGroup->PlayAndDisableAnimation(0, units);
 
-   paneGroup = this->animator.PaneGroupById(1); //second digit
-   paneGroup->DisplayAnimation(0, tens);
+   paneGroup = this->animator.GetPaneGroupById(1); //second digit
+   paneGroup->PlayAndDisableAnimation(0, tens);
 
-   paneGroup = this->animator.PaneGroupById(0); //first digit
-   paneGroup->DisplayAnimation(0, hundreds);
+   paneGroup = this->animator.GetPaneGroupById(0); //first digit
+   paneGroup->PlayAndDisableAnimation(0, hundreds);
    return;
 }
 
