@@ -12,6 +12,7 @@ echo %RIIVO%
 :: CPP compilation settings
 SET CC="cw/mwcceppc.exe"
 SET CFLAGS=-I- -i libraries -i projects/%SOURCE% -i projects/CommonCodes -Cpp_exceptions off -enum int -O4,s -use_lmw_stmw on -fp hard -rostr -sdata 0 -sdata2 0 -maxerrors 1 -d NANDSZSLOADER -d BOOTMENUS -d GHOSTLOADER
+SET DEFINE=-d ENHANCEDREPLAY=1 -d MULTIGHOST=1 -d BOOTMENUS=1 -d NANDSZSLOADER=1
 
 :: CPP Sources
 SET CPPFILES=
